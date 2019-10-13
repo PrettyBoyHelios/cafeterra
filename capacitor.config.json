@@ -1,0 +1,7 @@
+{
+  "appId": "com.upbona.cafeterra",
+  "appName": "cafeterra",
+  "bundledWebRuntime": false,
+  "npmClient": "yarn",
+  "webDir": "www"
+}
