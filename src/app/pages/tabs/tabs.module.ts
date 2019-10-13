@@ -28,8 +28,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/tabs/food',
-    pathMatch: 'full'
+    redirectTo: '/tabs/food'
   }
 ];
 
