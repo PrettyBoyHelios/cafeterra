@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Order} from '../../models/order';
 
 @Component({
   selector: 'app-orders',
@@ -6,8 +7,27 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./orders.page.scss'],
 })
 export class OrdersPage implements OnInit {
+  orders: Order[];
+  constructor() {
+    this.orders = [
+      {
+        id: '1ajsbdascsbeewnew',
+        store: {
+          storeName: 'Banquetes Mary',
+        },
+        totalAmount: 84.50,
+        items: [
+          {
+            productId: 'suabdaisdsaasfas',
+            productName: 'Coca-Cola Light',
+            quantity: 1,
+            price: 12.50,
+          },
+        ]
+      }
+    ];
+  }
 
-  constructor() { }
 
   ngOnInit() {
   }

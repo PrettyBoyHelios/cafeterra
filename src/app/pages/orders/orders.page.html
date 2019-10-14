@@ -5,5 +5,8 @@
 </ion-header>
 
 <ion-content>
-
+  <ion-list>
+    <app-order *ngFor="let order for orders"></app-order>
+    <app-order></app-order>
+  </ion-list>
 </ion-content>
