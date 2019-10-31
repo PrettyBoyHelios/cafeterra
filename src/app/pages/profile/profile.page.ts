@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfilePage implements OnInit {
 
+  email: string;
+  password: string;
+  
   constructor() { }
 
   ngOnInit() {
