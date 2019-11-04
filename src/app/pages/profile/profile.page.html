@@ -4,20 +4,18 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="!loggedIn" padding>
-  <ion-content>
-    <img class="icon" src="assets/icon/favicon.png" alt="">
-  <ion-item>
-    <ion-label position="floating" > Correo electrónico</ion-label>
-    <ion-input type="text" [(ngModel)]="email" name="email"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating" > Contraseña</ion-label>
-    <ion-input [(ngModel)]="password" type="password" name="password"></ion-input>
-  </ion-item>
-  <br>
-  <ion-button (click)="onSubmitLogin()" expand="block">Entrar</ion-button>
-  <br>
-  <p text-center routerLink="/tabs/register">Crear cuenta</p>
-  </ion-content>
+<ion-content>
+  <img class="icon" src="assets/icon/favicon.png" alt="" padding>
+<ion-item>
+  <ion-label position="floating" > Correo electrónico</ion-label>
+  <ion-input type="text" [(ngModel)]="email" name="email"></ion-input>
+</ion-item>
+<ion-item>
+  <ion-label position="floating" > Contraseña</ion-label>
+  <ion-input [(ngModel)]="password" type="password" name="password"></ion-input>
+</ion-item>
+<br>
+<ion-button (click)="onSubmitLogin()" expand="block">Entrar</ion-button>
+<br>
+<p text-center routerLink="/tabs/register">Crear cuenta</p>
 </ion-content>

@@ -13,25 +13,26 @@ export class ProfilePage implements OnInit {
 
   email: string;
   password: string;
-  currentUser : any;
-  loggedIn = false;
+  // currentUser : any;
+  // loggedIn = false;
 
-  constructor(private authService:AuthService, private fauthService: AngularFireAuth, public router: Router) { }
+  constructor(private authService: AuthService, public router: Router) { }
 
   ngOnInit() {
-    this.currentUser = this.fauthService.auth.currentUser;
-    console.log(this.currentUser);
-    if(this.currentUser === null){
-      this.loggedIn = true;
-    }else{
-      this.loggedIn = false;
-    }
+    // this.currentUser = this.fauthService.auth.currentUser;
+    // console.log(this.currentUser);
+    // if(this.currentUser === null){
+    //   this.loggedIn = true;
+    // }else{
+    //   this.loggedIn = false;
+    // }
   }
 
   onSubmitLogin()
   {
     this.authService.login(this.email, this.password).then( res =>{
-      this.router.navigate(['/home']);
+      console.log("Log In exitoso");
+      this.router.navigate(['/tabs/food/']);
     }).catch(err => alert('los datos son incorrectos o no existe el usuario'))
   }
 

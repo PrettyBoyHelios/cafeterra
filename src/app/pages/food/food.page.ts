@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { AuthService } from "../../services/auth.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-food',
@@ -11,7 +13,7 @@ export class FoodPage implements OnInit {
   hasVerifiedEmail = true;
   sentTimestamp;
 
-  constructor(public aufAuth : AngularFireAuth) { 
+  constructor(private authService:AuthService, private aufAuth : AngularFireAuth, public router: Router) { 
     this.aufAuth.authState.subscribe(user =>{
       if(user){
         this.hasVerifiedEmail = this.aufAuth.auth.currentUser.emailVerified;
@@ -29,5 +31,10 @@ export class FoodPage implements OnInit {
 
   reload() {
     window.location.reload();
+  }
+
+  Onlogout(){
+    console.log("Saliste de la sesión");
+    this.authService.logout();
   }
 }

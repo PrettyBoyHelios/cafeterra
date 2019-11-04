@@ -20,7 +20,7 @@ export class RegisterPage implements OnInit {
 
   OnSubmitRegister(){
     this.auth.register(this.email, this.password,this.name).then( auth => {
-      this.router.navigate(['home'])
+      this.router.navigate(['/tabs/food'])
       console.log(auth)
     }).catch(err => console.log(err))
   }

@@ -4,6 +4,8 @@
   </ion-toolbar>
 </ion-header>
 
+<ion-button (click)="Onlogout()" >desconectarse</ion-button>
+
 <ion-header *ngIf="!hasVerifiedEmail" padding class="verify-email">
   <div>
     Please send a verification email and verify your account
@@ -26,9 +28,5 @@
     <app-food-item></app-food-item>
     <app-food-item></app-food-item>
     <app-food-item></app-food-item>
-
-
-
-
 
 </ion-content>

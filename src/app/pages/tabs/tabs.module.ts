@@ -6,6 +6,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { TabsPage } from './tabs.page';
+import { AuthGuard } from 'src/app/guards/auth.guard';
+import { NoLoginGuard } from '../../guards/nologin.guard'
 
 const routes: Routes = [
   {
@@ -14,7 +16,8 @@ const routes: Routes = [
     children: [
       {
         path: 'food',
-        loadChildren: '../food/food.module#FoodPageModule'
+        loadChildren: '../food/food.module#FoodPageModule',
+        canActivate: [NoLoginGuard]
       },
       {
         path: 'orders',
@@ -32,7 +35,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/tabs/food'
+    redirectTo: '/tabs/profile'
   }
 ];
 
