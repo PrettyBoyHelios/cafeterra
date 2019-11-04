@@ -23,6 +23,10 @@ const routes: Routes = [
       {
         path: 'profile',
         loadChildren: '../profile/profile.module#ProfilePageModule'
+      },
+      {
+        path: 'register',
+        loadChildren: '../register/register.module#RegisterPageModule'
       }
     ]
   },

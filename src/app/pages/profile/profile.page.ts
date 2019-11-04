@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from "../../services/auth.service";
 import { Router } from "@angular/router";
+import { AngularFireAuth } from "@angular/fire/auth";
 
 @Component({
   selector: 'app-profile',
@@ -12,10 +13,19 @@ export class ProfilePage implements OnInit {
 
   email: string;
   password: string;
+  currentUser : any;
+  loggedIn = false;
 
-  constructor(private authService: AuthService, public router: Router) { }
+  constructor(private authService:AuthService, private fauthService: AngularFireAuth, public router: Router) { }
 
   ngOnInit() {
+    this.currentUser = this.fauthService.auth.currentUser;
+    console.log(this.currentUser);
+    if(this.currentUser === null){
+      this.loggedIn = true;
+    }else{
+      this.loggedIn = false;
+    }
   }
 
   onSubmitLogin()
