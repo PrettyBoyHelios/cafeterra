@@ -1,10 +1,14 @@
 <ion-header>
-  <ion-toolbar color="primary">
-    <ion-title text-center>Iniciar sesión</ion-title>
+  <ion-toolbar *ngIf="!loggedIn" color="primary" class="ion-padding">
+    <ion-title text-center>Iniciar Sesión</ion-title>
   </ion-toolbar>
+  <ion-toolbar *ngIf="loggedIn" color="primary" class="ion-padding">
+    <ion-title text-center>Sesión Iniciada</ion-title>
+  </ion-toolbar>
+  <p text-center>Te encuentras: {{loggedIn}}</p>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="!loggedIn">
   <img class="icon" src="assets/icon/favicon.png" alt="" padding>
 <ion-item>
   <ion-label position="floating" > Correo electrónico</ion-label>
@@ -18,4 +22,33 @@
 <ion-button (click)="onSubmitLogin()" expand="block">Entrar</ion-button>
 <br>
 <p text-center routerLink="/tabs/register">Crear cuenta</p>
+</ion-content>
+
+
+<ion-content *ngIf="loggedIn">
+  <ion-list>
+    <ion-menu-toggle auto-hide="false">
+      <ion-item [routerLink]="['/forms-and-validations']">
+        <ion-icon slot="start" name="md-person"></ion-icon>
+        <ion-label>
+          <h2>
+            Hola, {{userName}}
+          </h2>
+          <p>{{userEmail}}</p>
+        </ion-label>
+      </ion-item>
+      <ion-item [routerLink]="['/forms-and-validations']">
+        <ion-icon slot="start" name="md-settings"></ion-icon>
+        <ion-label>
+          Configuración
+        </ion-label>
+      </ion-item>
+      <ion-item [routerLink]="['/forms-filters']">
+        <ion-icon slot="start" name="md-log-out"></ion-icon>
+        <ion-label>
+          Cerrar sesión
+        </ion-label>
+      </ion-item>
+    </ion-menu-toggle>
+  </ion-list>
 </ion-content>

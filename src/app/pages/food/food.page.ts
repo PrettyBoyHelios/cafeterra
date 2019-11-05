@@ -35,6 +35,8 @@ export class FoodPage implements OnInit {
 
   Onlogout(){
     console.log("Saliste de la sesión");
-    this.authService.logout();
+    this.authService.logoutUser();
+    this.reload();
+    //this.router.navigate(['/tabs/profile/']);
   }
 }
