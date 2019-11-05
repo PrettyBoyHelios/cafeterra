@@ -8,11 +8,13 @@ import { AngularFirestore } from "@angular/fire/firestore";
 })
 
 export class AuthService {
+  loggedIn = false;
 
   constructor(private authService:AngularFireAuth, private router: Router, private db : AngularFirestore) { }
 
   login(email:string, password:string){
     return new Promise((resolve, rejected) =>{
+      this.loggedIn = true;
       this.authService.auth.signInWithEmailAndPassword(email, password).then(user => {
         resolve(user);
       }).catch(err => rejected(err));
@@ -36,6 +38,7 @@ export class AuthService {
 
   logout(){
     this.authService.auth.signOut().then(() => {
+      this.loggedIn = false;
       this.router.navigate(['/tabs/profile']);
     });
   }

@@ -12,12 +12,15 @@ import { Router } from "@angular/router";
 export class FoodPage implements OnInit {
   hasVerifiedEmail = true;
   sentTimestamp;
+//  loggedIn = false;
 
   constructor(private authService:AuthService, private aufAuth : AngularFireAuth, public router: Router) { 
     this.aufAuth.authState.subscribe(user =>{
       if(user){
         this.hasVerifiedEmail = this.aufAuth.auth.currentUser.emailVerified;
+    //    this.loggedIn = true;
       }
+      
     });
   }
 
@@ -36,5 +39,6 @@ export class FoodPage implements OnInit {
   Onlogout(){
     console.log("Saliste de la sesión");
     this.authService.logout();
+    //this.loggedIn = false;
   }
 }
