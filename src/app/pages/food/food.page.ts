@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ProductService} from '../../services/product.service';
 import {Order} from '../../models/order';
+import {Product} from '../../models/product/product';
 
 @Component({
   selector: 'app-food',
@@ -8,7 +9,7 @@ import {Order} from '../../models/order';
   styleUrls: ['./food.page.scss'],
 })
 export class FoodPage implements OnInit {
-  private products: Order[];
+  private products: Product[];
   constructor(private prodService: ProductService) {}
 
   ngOnInit() {
