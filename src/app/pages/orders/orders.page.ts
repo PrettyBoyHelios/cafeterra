@@ -11,7 +11,6 @@ export class OrdersPage implements OnInit {
   constructor() {
     this.orders = [
       {
-        id: '1ajsbdascsbeewnew',
         store: {
           storeName: 'Banquetes Mary',
         },
