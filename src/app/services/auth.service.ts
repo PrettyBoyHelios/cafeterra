@@ -2,20 +2,21 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from "@angular/fire/auth";
 import { Router } from "@angular/router";
 import { AngularFirestore } from "@angular/fire/firestore";
+import * as firebase from 'firebase/app';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class AuthService {
-  loggedIn = false;
+  isLoggedIn = false;
 
   constructor(private authService:AngularFireAuth, private router: Router, private db : AngularFirestore) { }
 
   login(email:string, password:string){
     return new Promise((resolve, rejected) =>{
-      this.loggedIn = true;
       this.authService.auth.signInWithEmailAndPassword(email, password).then(user => {
+        this.isLoggedIn = true;
         resolve(user);
       }).catch(err => rejected(err));
     });
@@ -36,10 +37,24 @@ export class AuthService {
     });
   }
 
-  logout(){
-    this.authService.auth.signOut().then(() => {
-      this.loggedIn = false;
-      this.router.navigate(['/tabs/profile']);
-    });
+  logoutUser(){
+    return new Promise((resolve, reject) => {
+      if(firebase.auth().currentUser){
+        firebase.auth().signOut()
+        .then(() => {
+          console.log("Log Out");
+          this.isLoggedIn = false;
+          resolve();
+        }).catch((error) => {
+          reject();
+        });
+      }
+    })
   }
+
+  userDetails(){
+    return firebase.auth().currentUser;
+  }
+
+
 }

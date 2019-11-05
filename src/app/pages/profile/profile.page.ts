@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from "../../services/auth.service";
 import { Router } from "@angular/router";
 import { AngularFireAuth } from "@angular/fire/auth";
+import { FirebaseAuth } from '@angular/fire';
 
 @Component({
   selector: 'app-profile',
@@ -10,34 +11,38 @@ import { AngularFireAuth } from "@angular/fire/auth";
 })
 
 export class ProfilePage implements OnInit {
-
+  userEmail: string;
   email: string;
   password: string;
   currentUser : any;
-  loggedIn = false;
-  name: any;
+  loggedIn : boolean;
+  userName: string;
 
   constructor(private authService: AuthService, private fauthService: AngularFireAuth, public router: Router) { }
 
-  ngOnInit() {
-    
-    console.log(this.fauthService.auth.currentUser.displayName);
-    if(this.currentUser === null){
-      console.log("No inicio sesión");
-      //this.loggedIn = false;
+  ngOnInit(){
+    this.loggedIn = this.authService.isLoggedIn;
+    console.log("loggeado: " + this.loggedIn);
+    if(this.authService.userDetails()){
+      this.userEmail = this.authService.userDetails().email;
+      this.userName = this.authService.userDetails().displayName;
+      console.log(this.userName + " - " + this.userEmail);
     }else{
-      console.log("Sí inicio sesión");
-      //this.loggedIn = true;
+      this.router.navigate(['/tabs/profile/']);
     }
-    this.loggedIn = this.authService.loggedIn;
+  }
+
+  ionViewWillEnter(){
+    this.loggedIn = this.authService.isLoggedIn;
+    this.userEmail = this.authService.userDetails().email;
+    this.userName = this.authService.userDetails().email.split('@')[0];
+    console.log(this.userName + " - " + this.userEmail + " - " + this.loggedIn);
   }
 
   onSubmitLogin()
   {
     this.authService.login(this.email, this.password).then( res =>{
       console.log("Log In exitoso");
-      this.name = this.fauthService.auth.currentUser.displayName;
-      console.log("name : " + this.name);
       //this.loggedIn = true;
       this.router.navigate(['/tabs/food/']);
     }).catch(err => alert('los datos son incorrectos o no existe el usuario'))

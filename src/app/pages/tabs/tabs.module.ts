@@ -30,6 +30,10 @@ const routes: Routes = [
       {
         path: 'register',
         loadChildren: '../register/register.module#RegisterPageModule'
+      },
+      {
+        path: 'dashboard',
+        loadChildren: '../dashboard/dashboard.module#DashboardPageModule'
       }
     ]
   },
