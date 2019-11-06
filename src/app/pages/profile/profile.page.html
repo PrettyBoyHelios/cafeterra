@@ -5,7 +5,7 @@
   <ion-toolbar *ngIf="loggedIn" color="primary" class="ion-padding">
     <ion-title text-center>Sesión Iniciada</ion-title>
   </ion-toolbar>
-  <p text-center>Te encuentras: {{loggedIn}}</p>
+  <p text-center>Logged: {{loggedIn}}</p>
 </ion-header>
 
 <ion-content *ngIf="!loggedIn">
@@ -24,7 +24,6 @@
 <p text-center routerLink="/tabs/register">Crear cuenta</p>
 </ion-content>
 
-
 <ion-content *ngIf="loggedIn">
   <ion-list>
     <ion-menu-toggle auto-hide="false">
@@ -32,7 +31,7 @@
         <ion-icon slot="start" name="md-person"></ion-icon>
         <ion-label>
           <h2>
-            Hola, {{userName}}
+            Hola, {{userNameFromAuth}}
           </h2>
           <p>{{userEmail}}</p>
         </ion-label>

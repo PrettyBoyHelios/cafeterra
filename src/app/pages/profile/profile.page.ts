@@ -16,17 +16,18 @@ export class ProfilePage implements OnInit {
   password: string;
   currentUser : any;
   loggedIn : boolean;
-  userName: string;
+  userNameFromAuth: string;
 
-  constructor(private authService: AuthService, private fauthService: AngularFireAuth, public router: Router) { }
-
-  ngOnInit(){
+  constructor(private authService: AuthService, private fauthService: AngularFireAuth, public router: Router) { 
     this.loggedIn = this.authService.isLoggedIn;
+  }
+
+  ngOnInit(){   
     console.log("loggeado: " + this.loggedIn);
     if(this.authService.userDetails()){
       this.userEmail = this.authService.userDetails().email;
-      this.userName = this.authService.userDetails().displayName;
-      console.log(this.userName + " - " + this.userEmail);
+      this.userNameFromAuth = this.authService.userName;
+      console.log(this.userNameFromAuth + " - " + this.userEmail);
     }else{
       this.router.navigate(['/tabs/profile/']);
     }
@@ -35,8 +36,11 @@ export class ProfilePage implements OnInit {
   ionViewWillEnter(){
     this.loggedIn = this.authService.isLoggedIn;
     this.userEmail = this.authService.userDetails().email;
-    this.userName = this.authService.userDetails().email.split('@')[0];
-    console.log(this.userName + " - " + this.userEmail + " - " + this.loggedIn);
+    this.userNameFromAuth = this.authService.userName;
+    //this.userName = this.authService.userDetails().email.split('@')[0];
+    //this.userName = this.authService.userDetails().displayName;
+    //this.userName = user.displayName;
+    console.log(this.userNameFromAuth + " - " + this.userEmail + " - " + this.loggedIn);
   }
 
   onSubmitLogin()

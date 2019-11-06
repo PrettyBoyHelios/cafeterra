@@ -3,21 +3,34 @@ import { AngularFireAuth } from "@angular/fire/auth";
 import { Router } from "@angular/router";
 import { AngularFirestore } from "@angular/fire/firestore";
 import * as firebase from 'firebase/app';
-
+import { Observable } from 'rxjs/Observable';
 @Injectable({
   providedIn: 'root'
 })
 
 export class AuthService {
   isLoggedIn = false;
+  userName: string;
 
-  constructor(private authService:AngularFireAuth, private router: Router, private db : AngularFirestore) { }
+  constructor(private authService:AngularFireAuth, private db : AngularFirestore) { }
 
   login(email:string, password:string){
     return new Promise((resolve, rejected) =>{
       this.authService.auth.signInWithEmailAndPassword(email, password).then(user => {
         this.isLoggedIn = true;
         resolve(user);
+        const uid = user.user.uid;
+        this.db.collection("users")
+        .doc(uid)
+        .ref
+        .get().then(function(doc) {
+        if (doc.exists) {
+          console.log("Nombre: " + doc.data().name);
+          this.userName = JSON.stringify( this.doc.data().name);
+        } 
+        }).catch(function(error) {
+            console.log("Error getting document:", error);
+        });
       }).catch(err => rejected(err));
     });
   }
@@ -27,11 +40,11 @@ export class AuthService {
       this.authService.auth.createUserWithEmailAndPassword(email, password).then( res =>{
           // console.log(res.user.uid);
         const uid = res.user.uid;
+        console.log(res.user.displayName);
           this.db.collection('users').doc(uid).set({
             name : name,
             uid : uid
           })
-        
         resolve(res)
       }).catch( err => reject(err))
     });
@@ -55,6 +68,4 @@ export class AuthService {
   userDetails(){
     return firebase.auth().currentUser;
   }
-
-
 }
