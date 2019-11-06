@@ -4,6 +4,7 @@ import {Order} from '../../models/order';
 import {Product} from '../../models/product/product';
 import {Router, Routes} from '@angular/router';
 import {TabsPage} from '../tabs/tabs.page';
+import {ShoppingCartService} from '../../services/shopping-cart/shopping-cart.service';
 
 @Component({
   selector: 'app-food',
@@ -12,7 +13,11 @@ import {TabsPage} from '../tabs/tabs.page';
 })
 export class FoodPage implements OnInit {
   private products: Product[];
-  constructor(private prodService: ProductService, private router: Router) {}
+  constructor(
+      private prodService: ProductService,
+      private shopService: ShoppingCartService,
+      private router: Router
+  ) {}
 
   ngOnInit() {
     this.prodService.getProducts().subscribe( res => {
@@ -22,5 +27,9 @@ export class FoodPage implements OnInit {
 
   async goToShoppingCart() {
     await this.router.navigate(['shopping-cart']);
+  }
+
+  addProductToShoppingCart(item: Product) {
+    this.shopService.addProduct(item);
   }
 }

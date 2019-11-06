@@ -5,5 +5,12 @@
 </ion-header>
 
 <ion-content>
-  Hello!
+  <ion-list>
+    <ion-list-header>
+      Productos en tu carrito
+    </ion-list-header>
+    <ion-item *ngFor="let orderItem of productsInCart">
+      {{orderItem.product.name}}
+    </ion-item>
+  </ion-list>
 </ion-content>

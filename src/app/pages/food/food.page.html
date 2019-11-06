@@ -17,7 +17,7 @@
     <!-- All Items TODO Limit to 20 -->
     <ion-list>
         <div *ngFor="let item of products">
-            <ion-item *ngIf="item.available">
+            <ion-item *ngIf="item.available" (click)="addProductToShoppingCart(item)">
                 <ion-avatar slot="start">
                     <img src="{{item.image}}" alt="{{item.description}}">
                 </ion-avatar>
