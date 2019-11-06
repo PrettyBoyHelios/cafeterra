@@ -8,11 +8,14 @@ import {OrderItem} from '../../models/order-item';
   styleUrls: ['./shopping-cart.page.scss'],
 })
 export class ShoppingCartPage implements OnInit {
-  private productsInCart: OrderItem[];
+  private store: string;
   constructor(private shopService: ShoppingCartService) { }
 
   ngOnInit() {
-    this.productsInCart = this.shopService.getCartProducts();
+    this.store = this.shopService.getStore();
   }
 
+  public deleteItem(id: string) {
+    this.shopService.removeItemFromOrder(id);
+  }
 }
