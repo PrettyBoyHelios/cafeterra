@@ -10,12 +10,14 @@
     </ion-text>
     <ion-searchbar animated></ion-searchbar>
 
-    <!-- Featured Items -->
-    <app-food-item></app-food-item>
+    <!-- Day's Special Items -->
     <app-food-item></app-food-item>
 
     <!-- All Items TODO Limit to 20 -->
     <ion-list>
+        <ion-list-header>
+            Todos los Productos
+        </ion-list-header>
         <div *ngFor="let item of products">
             <ion-item *ngIf="item.available" (click)="addProductToShoppingCart(item)">
                 <ion-avatar slot="start">
