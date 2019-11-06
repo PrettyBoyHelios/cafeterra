@@ -8,6 +8,19 @@
   <p text-center>Logged: {{loggedIn}}</p>
 </ion-header>
 
+<ion-header *ngIf="!hasVerifiedEmail" padding class="verify-email">
+  <div>
+    Por favor, verifica tu cuenta.
+  </div>
+  <div>
+    <!-- <ion-button color="secondary" (click)="sendVerificationEmail()">Send Verification Email</ion-button>
+    <ion-button color="secondary" (click)="reload()">Refesh</ion-button> -->
+  </div>
+  <!-- <div *ngIf="sentTimestamp">
+    Verification email sent at {{sentTimestamp | date:'medium'}}
+  </div> -->
+</ion-header>
+
 <ion-content *ngIf="!loggedIn">
   <img class="icon" src="assets/icon/favicon.png" alt="" padding>
 <ion-item>
@@ -22,6 +35,7 @@
 <ion-button (click)="onSubmitLogin()" expand="block">Entrar</ion-button>
 <br>
 <p text-center routerLink="/tabs/register">Crear cuenta</p>
+<p text-center padding routerLink="/tabs/forgotpassword">No recuerdo mi contraseña</p>
 </ion-content>
 
 <ion-content *ngIf="loggedIn">
@@ -44,7 +58,7 @@
       </ion-item>
       <ion-item [routerLink]="['/forms-filters']">
         <ion-icon slot="start" name="md-log-out"></ion-icon>
-        <ion-label>
+        <ion-label (click)="Onlogout()">
           Cerrar sesión
         </ion-label>
       </ion-item>

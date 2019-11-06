@@ -4,21 +4,6 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-button (click)="Onlogout()" >Desconectarse</ion-button>
-
-<ion-header *ngIf="!hasVerifiedEmail" padding class="verify-email">
-  <div>
-    Please send a verification email and verify your account
-  </div>
-  <div>
-    <ion-button color="secondary" (click)="sendVerificationEmail()">Send Verification Email</ion-button>
-    <ion-button color="secondary" (click)="reload()">Refesh</ion-button>
-  </div>
-  <div *ngIf="sentTimestamp">
-    Verification email sent at {{sentTimestamp | date:'medium'}}
-  </div>
-</ion-header>
-
 <ion-content *ngIf="loggedIn" padding>
     <ion-text color="#AAAAAA" style="font-size: 2em; margin-left: 20px;text-align: center">
         <h1>Recomendaciones</h1>

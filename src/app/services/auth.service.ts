@@ -10,8 +10,8 @@ import { Observable } from 'rxjs/Observable';
 
 export class AuthService {
   isLoggedIn = false;
-  userName: string;
-
+  hasEmailVerified = false;
+  
   constructor(private authService:AngularFireAuth, private db : AngularFirestore) { }
 
   login(email:string, password:string){
@@ -19,28 +19,17 @@ export class AuthService {
       this.authService.auth.signInWithEmailAndPassword(email, password).then(user => {
         this.isLoggedIn = true;
         resolve(user);
-        const uid = user.user.uid;
-        this.db.collection("users")
-        .doc(uid)
-        .ref
-        .get().then(function(doc) {
-        if (doc.exists) {
-          console.log("Nombre: " + doc.data().name);
-          this.userName = JSON.stringify( this.doc.data().name);
-        } 
-        }).catch(function(error) {
-            console.log("Error getting document:", error);
-        });
       }).catch(err => rejected(err));
     });
   }
 
   register(email : string, password : string, name : string){
+    this.hasEmailVerified = false;
     return new Promise ((resolve, reject) => {
       this.authService.auth.createUserWithEmailAndPassword(email, password).then( res =>{
           // console.log(res.user.uid);
         const uid = res.user.uid;
-        console.log(res.user.displayName);
+        this.authService.auth.currentUser.sendEmailVerification();
           this.db.collection('users').doc(uid).set({
             name : name,
             uid : uid

@@ -29,7 +29,7 @@
     "@ionic/angular": "^4.11.3",
     "core-js": "^2.6.10",
     "firebase": "^7.2.3",
-    "rxjs": "~6.5.1",
+    "rxjs": "^6.5.3",
     "rxjs-compat": "^6.5.3",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"

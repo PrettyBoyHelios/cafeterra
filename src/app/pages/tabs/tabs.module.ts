@@ -32,8 +32,8 @@ const routes: Routes = [
         loadChildren: '../register/register.module#RegisterPageModule'
       },
       {
-        path: 'dashboard',
-        loadChildren: '../dashboard/dashboard.module#DashboardPageModule'
+        path: 'forgotpassword',
+        loadChildren: '../forgotpassword/forgotpassword.module#ForgotpasswordPageModule'
       }
     ]
   },
