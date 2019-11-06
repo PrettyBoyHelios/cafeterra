@@ -23,7 +23,10 @@ const routes: Routes = [
       {
         path: 'profile',
         loadChildren: '../profile/profile.module#ProfilePageModule'
-      }
+      },
+      { path: 'shopping-cart',
+        loadChildren: '../shopping-cart/shopping-cart.module#ShoppingCartPageModule'
+      },
     ]
   },
   {

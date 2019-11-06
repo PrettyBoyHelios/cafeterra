@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {ProductService} from '../../services/product.service';
 import {Order} from '../../models/order';
 import {Product} from '../../models/product/product';
+import {Router, Routes} from '@angular/router';
+import {TabsPage} from '../tabs/tabs.page';
 
 @Component({
   selector: 'app-food',
@@ -10,13 +12,15 @@ import {Product} from '../../models/product/product';
 })
 export class FoodPage implements OnInit {
   private products: Product[];
-  constructor(private prodService: ProductService) {}
+  constructor(private prodService: ProductService, private router: Router) {}
 
   ngOnInit() {
     this.prodService.getProducts().subscribe( res => {
-      console.log(res);
       this.products = res;
     });
   }
 
+  async goToShoppingCart() {
+    await this.router.navigate(['shopping-cart']);
+  }
 }
