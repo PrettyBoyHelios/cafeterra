@@ -23,6 +23,7 @@ export class ProductService {
   }
 
   public getProducts() {
+    console.log(this.products);
     return this.products;
   }
 

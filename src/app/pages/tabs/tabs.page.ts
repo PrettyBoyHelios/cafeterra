@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ShoppingCartService} from '../../services/shopping-cart/shopping-cart.service';
 
 @Component({
   selector: 'app-tabs',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TabsPage implements OnInit {
 
-  constructor() { }
+  constructor(private shopService: ShoppingCartService) { }
 
   ngOnInit() {
   }

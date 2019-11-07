@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Mi Carrito</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="shopService.totalProducts > 0">
+    <ion-list>
+      <ion-list-header>
+        Productos en tu Carrito
+      </ion-list-header>
+      <ion-item-sliding *ngFor="let orderItem of shopService.getCartProducts()">
+        <ion-item >
+          <ion-label>
+            <h2>({{orderItem.quantity}}) {{orderItem.product.name}}</h2>
+            <h3>{{orderItem.product.description}}</h3>
+          </ion-label>
+          <ion-button fill="clear" (click)="shopService.removeOneItem(orderItem.product.id)">
+            <ion-icon name="remove-circle"></ion-icon>
+          </ion-button>
+          {{orderItem.product.price * orderItem.quantity | currency:'MXN'}}
+          <ion-button fill="clear" (click)="shopService.addOneItem(orderItem.product.id)">
+            <ion-icon name="add-circle"></ion-icon>
+          </ion-button>
+        </ion-item>
+        <ion-item-options side="end">
+          <ion-item-option (click)="deleteItem(orderItem.product.id)">Quitar</ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+      <ion-item-divider>
+        <ion-label>
+          Total
+        </ion-label>
+      </ion-item-divider>
+      <ion-item class="ion-align-items-end">
+        <ion-label>
+          <h1>
+            {{shopService.totalAmount | currency:'MXN'}}
+          </h1>
+
+        </ion-label>
+      </ion-item>
+    </ion-list>
+    <ion-button expand="block" color="primary" (click)="createOrder(shopService.orderBuilder, shopService.getStore())">
+      Ordenar
+    </ion-button>
+    <ion-button expand="block" color="danger" (click)="shopService.cancelWholeOrder()">
+      Cancelar Orden
+    </ion-button>
+  </div>
+  <div *ngIf="shopService.totalProducts === 0" class="ion-padding">
+    No has agregado productos. Por favor dirígete a la pestaña de alimentos y selecciona el primero. ¡Estamos ansiosos de atenderte!
+  </div>
+
+</ion-content>

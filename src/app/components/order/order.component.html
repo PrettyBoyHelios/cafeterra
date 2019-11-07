@@ -1,21 +1,32 @@
 <ion-card>
-  <img src="./assets/qr1.png" />
+  <div *ngIf="details">
+    <ngx-qrcode
+            [qrc-element-type]="'url'"
+            [qrc-value] = "order.id"
+            qrc-class = "aclass"
+            qrc-errorCorrectionLevel = "H">
+    </ngx-qrcode>
+  </div>
+
   <ion-card-header>
-    <ion-card-subtitle>Viernes 22 de Agosto de 2019</ion-card-subtitle>
+    <ion-card-subtitle>{{order.timeCreated | date: 'dd MMMM yyyy H:mm'}}</ion-card-subtitle>
     <div class="inline">
-      <ion-card-title class="ion-align-items-start">Mary</ion-card-title>
-      <ion-card-title class="ion-align-items-end">$29.00</ion-card-title>
+      <ion-card-title class="ion-align-items-start">{{order.storeId}}</ion-card-title>
+      <ion-card-title class="ion-align-items-end">{{order.totalAmount | currency: 'MXN' }}</ion-card-title>
     </div>
 
   </ion-card-header>
-  <ion-card-content>
+  <ion-card-content *ngIf="details">
     <ion-list>
-      <ion-item>
-        Coca-Cola Light
-      </ion-item>
-      <ion-item>
-        Tap to see more...
+      <ion-item *ngFor="let item of order.products">
+        <ion-avatar slot="start">
+          <img src="{{item.product.image}}" alt="{{item.product.description}}">
+        </ion-avatar>
+        ({{item.quantity}}) {{item.product.name}}
       </ion-item>
     </ion-list>
+    <ion-item lines="none" class="ion-justify-content-center ion-align-items-center">
+      <ion-icon *ngIf="order.status==='approved'" name="checkmark-circle-outline"></ion-icon>
+    </ion-item>
   </ion-card-content>
 </ion-card>

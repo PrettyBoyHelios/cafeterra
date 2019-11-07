@@ -10,31 +10,30 @@
     </ion-text>
     <ion-searchbar animated></ion-searchbar>
 
-    <!-- Featured Items -->
-    <app-food-item></app-food-item>
+    <!-- Day's Special Items -->
     <app-food-item></app-food-item>
 
     <!-- All Items TODO Limit to 20 -->
     <ion-list>
+        <ion-list-header>
+            Todos los Productos
+        </ion-list-header>
         <div *ngFor="let item of products">
-            <ion-item *ngIf="item.available">
-                <ion-avatar slot="start">
-                    <img src="{{item.image}}" alt="{{item.description}}">
-                </ion-avatar>
-                <ion-label>
-                    <h2>{{item.name}}</h2>
-                    <h3>{{item.description}}</h3>
-                    <p>{{item.rating | number:'1.2-2' }} | {{item.storeId}}</p> <!-- TODO replace store ID with Store -->
-                </ion-label>
-                {{item.price | currency:'MXN'}}
-            </ion-item>
+            <div class="ion-activatable">
+                <ion-item *ngIf="item.available" (click)="addProductToShoppingCart(item)">
+                    <ion-thumbnail slot="start">
+                        <img src="{{item.image}}" alt="{{item.description}}">
+                    </ion-thumbnail>
+                    <ion-label>
+                        <h2>{{item.name}}</h2>
+                        <h3>{{item.description}}</h3>
+                        <p>{{item.rating | number:'1.2-2' }} | {{item.storeId}}</p> <!-- TODO replace store ID with Store -->
+                    </ion-label>
+                    {{item.price | currency:'MXN'}}
+                    <ion-ripple-effect></ion-ripple-effect>
+                </ion-item>
+                <ion-ripple-effect></ion-ripple-effect>
+            </div>
         </div>
-
     </ion-list>
-
-    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-        <ion-fab-button>
-            <ion-icon name="cart"></ion-icon>
-        </ion-fab-button>
-    </ion-fab>
 </ion-content>

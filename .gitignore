@@ -31,3 +31,5 @@ npm-debug.log*
 /www
 /ios/*
 /src/environments/*.ts
+/resources/*
+config.xml
