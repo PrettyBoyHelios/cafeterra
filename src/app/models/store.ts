@@ -1,3 +1,4 @@
-export class Store {
+export interface Store {
+    id?: string;
     storeName: string;
 }

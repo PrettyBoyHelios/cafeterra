@@ -7,6 +7,7 @@
 <ion-content>
   <ion-list>
     <!--<app-order *ngFor="let order for orders"></app-order>-->
+    <ion-item *ngFor="let order of orders"> {{order.products}}</ion-item>
     <app-order></app-order>
   </ion-list>
 </ion-content>

@@ -42,7 +42,7 @@
         </ion-label>
       </ion-item>
     </ion-list>
-    <ion-button expand="block" color="primary">
+    <ion-button expand="block" color="primary" (click)="createOrder(shopService.orderBuilder, shopService.getStore())">
       Ordenar
     </ion-button>
     <ion-button expand="block" color="danger" (click)="shopService.cancelWholeOrder()">

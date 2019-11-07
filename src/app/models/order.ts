@@ -1,8 +1,10 @@
-import {OrderItem} from './order-item';
-import {Store} from './store';
+import {OrderItemI} from './order-item';
 
 export interface Order {
-    totalAmount?: number;
-    items?: OrderItem[];
-    store?: Store;
+    id?: string;
+    totalAmount: number;
+    products: OrderItemI[];
+    storeId: string;
+    userId: string;
+    status: string;
 }
