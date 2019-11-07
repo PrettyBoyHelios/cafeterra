@@ -7,4 +7,5 @@ export interface Order {
     storeId: string;
     userId: string;
     status: string;
+    timeCreated: number;
 }

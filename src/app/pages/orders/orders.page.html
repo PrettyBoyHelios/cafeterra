@@ -1,13 +1,11 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>orders</ion-title>
+    <ion-title>Mis Pedidos</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-list>
-    <!--<app-order *ngFor="let order for orders"></app-order>-->
-    <ion-item *ngFor="let order of orders"> {{order.products}}</ion-item>
     <app-order *ngFor="let order of orders" [order]="order"></app-order>
   </ion-list>
 </ion-content>

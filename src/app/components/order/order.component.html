@@ -1,20 +1,20 @@
 <ion-card>
-  <img src="./assets/qr1.png" />
+  <!--<img src="./assets/qr1.png" />-->
   <ion-card-header>
-    <ion-card-subtitle>Viernes 22 de Agosto de 2019</ion-card-subtitle>
+    <ion-card-subtitle>{{order.timeCreated | date: 'dd MMMM yyyy H:mm'}}</ion-card-subtitle>
     <div class="inline">
       <ion-card-title class="ion-align-items-start">{{order.storeId}}</ion-card-title>
-      <ion-card-title class="ion-align-items-end">{{order.totalAmount}}</ion-card-title>
+      <ion-card-title class="ion-align-items-end">{{order.totalAmount | currency: 'MXN' }}</ion-card-title>
     </div>
 
   </ion-card-header>
   <ion-card-content>
     <ion-list>
-      <ion-item>
-        Coca-Cola Light
-      </ion-item>
-      <ion-item>
-        Tap to see more...
+      <ion-item *ngFor="let item of order.products">
+        <ion-avatar slot="start">
+          <img src="{{item.product.image}}" alt="{{item.product.description}}">
+        </ion-avatar>
+        ({{item.quantity}}) {{item.product.name}}
       </ion-item>
     </ion-list>
   </ion-card-content>

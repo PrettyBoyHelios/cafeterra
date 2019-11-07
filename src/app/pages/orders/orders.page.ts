@@ -17,6 +17,15 @@ export class OrdersPage implements OnInit {
 
   ngOnInit() {
     this.orderService.getOrders().subscribe( res => {
+      res.sort((a, b) => {
+        if (a.timeCreated > b.timeCreated) {
+          return -1;
+        }
+        if (b.timeCreated > a.timeCreated) {
+          return 1;
+        }
+        return 0;
+      });
       this.orders = res;
     });
   }

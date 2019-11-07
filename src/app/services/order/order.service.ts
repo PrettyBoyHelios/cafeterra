@@ -15,6 +15,8 @@ export class OrderService {
   private orders: Observable<Order[]>;
   constructor(db: AngularFirestore) {
     this.orderCollection = db.collection<Order>('orders');
+    // this.orderCollection = db.collection<Order>('orders');
+    this.orderCollection.ref.orderBy('timeCreated', 'desc').limit(1);
     this.orders = this.orderCollection.snapshotChanges().pipe(map(actions => {
       return actions.map( a => {
         const data = a.payload.doc.data();
@@ -25,24 +27,26 @@ export class OrderService {
   }
 
   public getOrders() {
-    console.log(this.orders);
     return this.orders;
   }
 
   public addOrder(items: OrderItem[], store: string) {
     const userId = 'pending';
-    const sum = 0.0;
-    const s: Store = {
+    let sum = 0.0;
+    /* const s: Store = {
       storeName: 'pending',
       id: store,
-    };
-    console.log(store);
+    }; */
+    for (const item of items) {
+      sum += item.quantity * item.product.price;
+    }
     const order: Order = {
       products: items,
       userId,
       storeId: store,
       totalAmount: sum,
       status: 'approved',
+      timeCreated: Math.round((new Date()).getTime()),
     };
     this.orderCollection.add(order).then(r => console.log(r));
   }
