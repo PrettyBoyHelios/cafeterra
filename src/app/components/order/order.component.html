@@ -16,6 +16,9 @@
         </ion-avatar>
         ({{item.quantity}}) {{item.product.name}}
       </ion-item>
+      <ion-item *ngIf="order.status==='approved'">
+        yes!
+      </ion-item>
     </ion-list>
   </ion-card-content>
 </ion-card>

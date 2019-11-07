@@ -13,6 +13,8 @@ import { AngularFireModule} from '@angular/fire';
 import { AngularFirestoreModule} from '@angular/fire/firestore';
 import { environment} from '../environments/environment';
 
+import {Base64ToGallery} from '@ionic-native/base64-to-gallery/ngx';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -26,7 +28,8 @@ import { environment} from '../environments/environment';
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+      Base64ToGallery,
   ],
   bootstrap: [AppComponent]
 })

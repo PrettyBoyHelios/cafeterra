@@ -15,8 +15,7 @@ export class OrderService {
   private orders: Observable<Order[]>;
   constructor(db: AngularFirestore) {
     this.orderCollection = db.collection<Order>('orders');
-    // this.orderCollection = db.collection<Order>('orders');
-    this.orderCollection.ref.orderBy('timeCreated', 'desc').limit(1);
+    // this.orderCollection.ref.orderBy('timeCreated', 'desc').limit(1); // Apparently this doesn't work. Sort at order page
     this.orders = this.orderCollection.snapshotChanges().pipe(map(actions => {
       return actions.map( a => {
         const data = a.payload.doc.data();

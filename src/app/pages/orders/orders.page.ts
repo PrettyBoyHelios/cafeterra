@@ -11,7 +11,6 @@ import {OrderService} from '../../services/order/order.service';
 export class OrdersPage implements OnInit {
   private orders: Order[] = [];
   constructor(private orderService: OrderService) {
-    // this.orders =
   }
 
 
