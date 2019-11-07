@@ -14,6 +14,7 @@ import { AngularFirestoreModule} from '@angular/fire/firestore';
 import { environment} from '../environments/environment';
 
 import {Base64ToGallery} from '@ionic-native/base64-to-gallery/ngx';
+import {NgxQRCodeModule} from 'ngx-qrcode2';
 
 @NgModule({
   declarations: [AppComponent],
@@ -30,6 +31,7 @@ import {Base64ToGallery} from '@ionic-native/base64-to-gallery/ngx';
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
       Base64ToGallery,
+      NgxQRCodeModule
   ],
   bootstrap: [AppComponent]
 })

@@ -8,7 +8,12 @@ import {Order} from '../../models/order';
 })
 export class OrderComponent implements OnInit {
   @Input() order: Order;
-  constructor() { }
+  @Input() details: boolean;
+  private qrData: string;
+  constructor() {
+    this.details = false;
+    this.qrData = 'www.google.com';
+  }
 
   ngOnInit() {}
 

@@ -1,5 +1,14 @@
 <ion-card>
-  <!--<img src="./assets/qr1.png" />-->
+  <div *ngIf="details">
+    <!--<img src="./assets/qr1.png" />-->
+    <ngx-qrcode
+            [qrc-element-type]="'url'"
+            [qrc-value] = "order.id"
+            qrc-class = "aclass"
+            qrc-errorCorrectionLevel = "H">
+    </ngx-qrcode>
+  </div>
+
   <ion-card-header>
     <ion-card-subtitle>{{order.timeCreated | date: 'dd MMMM yyyy H:mm'}}</ion-card-subtitle>
     <div class="inline">
@@ -8,7 +17,7 @@
     </div>
 
   </ion-card-header>
-  <ion-card-content>
+  <ion-card-content *ngIf="details">
     <ion-list>
       <ion-item *ngFor="let item of order.products">
         <ion-avatar slot="start">

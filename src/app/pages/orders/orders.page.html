@@ -6,6 +6,6 @@
 
 <ion-content>
   <ion-list>
-    <app-order *ngFor="let order of orders" [order]="order"></app-order>
+    <app-order *ngFor="let order of orders" [order]="order" (click)="showOrderDetails(order)"></app-order>
   </ion-list>
 </ion-content>

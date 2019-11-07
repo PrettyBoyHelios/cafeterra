@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {Order} from '../../models/order';
 import {Product} from '../../models/product/product';
 import {OrderService} from '../../services/order/order.service';
+import {ModalController} from '@ionic/angular';
+import {OrderDetailPage} from '../order-detail/order-detail.page';
 
 @Component({
   selector: 'app-orders',
@@ -10,7 +12,10 @@ import {OrderService} from '../../services/order/order.service';
 })
 export class OrdersPage implements OnInit {
   private orders: Order[] = [];
-  constructor(private orderService: OrderService) {
+  constructor(
+      private orderService: OrderService,
+      public modalController: ModalController,
+  ) {
   }
 
 
@@ -27,6 +32,17 @@ export class OrdersPage implements OnInit {
       });
       this.orders = res;
     });
+  }
+
+  async showOrderDetails(o: Order) {
+    const modal = await this.modalController.create({
+      component: OrderDetailPage,
+      componentProps: {
+        order: o,
+        details: true,
+      }
+    });
+    return await modal.present();
   }
 
 }

@@ -27,6 +27,7 @@ const routes: Routes = [
       { path: 'shopping-cart',
         loadChildren: '../shopping-cart/shopping-cart.module#ShoppingCartPageModule'
       },
+      // { path: 'orders/order-detail', loadChildren: '../order-detail/order-detail.module#OrderDetailPageModule' },
     ]
   },
   {
