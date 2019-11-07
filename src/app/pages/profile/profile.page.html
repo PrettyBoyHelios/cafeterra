@@ -1,27 +1,14 @@
 <ion-header>
-  <ion-toolbar *ngIf="!loggedIn" color="primary" class="ion-padding">
+  <ion-toolbar *ngIf="!isLoggedIn" color="primary" class="ion-padding">
     <ion-title text-center>Iniciar Sesión</ion-title>
   </ion-toolbar>
-  <ion-toolbar *ngIf="loggedIn" color="primary" class="ion-padding">
+  <ion-toolbar *ngIf="isLoggedIn" color="primary" class="ion-padding">
     <ion-title text-center>Sesión Iniciada</ion-title>
   </ion-toolbar>
-  <p text-center>Logged: {{loggedIn}}</p>
+  <p *ngIf="!hasEmailVerification" text-center>Por favor, verifica tu cuenta y refresca.</p>
 </ion-header>
 
-<ion-header *ngIf="!hasVerifiedEmail" padding class="verify-email">
-  <div>
-    Por favor, verifica tu cuenta.
-  </div>
-  <div>
-    <!-- <ion-button color="secondary" (click)="sendVerificationEmail()">Send Verification Email</ion-button>
-    <ion-button color="secondary" (click)="reload()">Refesh</ion-button> -->
-  </div>
-  <!-- <div *ngIf="sentTimestamp">
-    Verification email sent at {{sentTimestamp | date:'medium'}}
-  </div> -->
-</ion-header>
-
-<ion-content *ngIf="!loggedIn">
+<ion-content *ngIf="!isLoggedIn">
   <img class="icon" src="assets/icon/favicon.png" alt="" padding>
 <ion-item>
   <ion-label position="floating" > Correo electrónico</ion-label>
@@ -38,7 +25,7 @@
 <p text-center padding routerLink="/tabs/forgotpassword">No recuerdo mi contraseña</p>
 </ion-content>
 
-<ion-content *ngIf="loggedIn">
+<ion-content *ngIf="isLoggedIn">
   <ion-list>
     <ion-menu-toggle auto-hide="false">
       <ion-item [routerLink]="['/forms-and-validations']">
