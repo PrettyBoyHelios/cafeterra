@@ -5,6 +5,7 @@ import {Product} from '../../models/product/product';
 import {Router, Routes} from '@angular/router';
 import {TabsPage} from '../tabs/tabs.page';
 import {ShoppingCartService} from '../../services/shopping-cart/shopping-cart.service';
+import {ToastController} from '@ionic/angular';
 
 @Component({
   selector: 'app-food',
@@ -16,7 +17,8 @@ export class FoodPage implements OnInit {
   constructor(
       private prodService: ProductService,
       private shopService: ShoppingCartService,
-      private router: Router
+      private router: Router,
+      private toastController: ToastController,
   ) {}
 
   ngOnInit() {
@@ -29,7 +31,34 @@ export class FoodPage implements OnInit {
     await this.router.navigate(['shopping-cart']);
   }
 
-  addProductToShoppingCart(item: Product) {
+  async addProductToShoppingCart(item: Product) {
     this.shopService.addProduct(item);
+    await this.presentToastWithOptions(item.name);
+  }
+
+  async presentToastWithOptions(prodName: string) {
+    const toast = await this.toastController.create({
+      header: '¡Añadiste ' + prodName + ' a tu pedido!',
+      message: '',
+      position: 'top',
+      duration: 1000,
+      buttons: [
+        {
+          side: 'start',
+          icon: 'pizza',
+          text: '',
+          handler: () => {
+            console.log('Favorite clicked');
+          }
+        }, {
+          text: 'Cerrar',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    await toast.present();
   }
 }

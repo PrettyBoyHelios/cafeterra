@@ -15,6 +15,8 @@ export class OrderComponent implements OnInit {
     this.qrData = 'www.google.com';
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
 }
+
