@@ -36,17 +36,9 @@ export class OrderService {
       storeName: 'pending',
       id: store,
     };
-    const auxItems: OrderItemI[] = [];
-    for (const i of items) {
-      const tempItem: OrderItemI = {
-        productId: i.product.id,
-        quantity: i.quantity,
-      };
-      auxItems.push(tempItem);
-    }
     console.log(store);
     const order: Order = {
-      products: auxItems,
+      products: items,
       userId,
       storeId: store,
       totalAmount: sum,
