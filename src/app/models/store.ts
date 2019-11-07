@@ -1,4 +1,4 @@
 export interface Store {
-    id?: string;
+    storeId?: string;
     storeName: string;
 }

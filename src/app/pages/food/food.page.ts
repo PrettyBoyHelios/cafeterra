@@ -32,33 +32,6 @@ export class FoodPage implements OnInit {
   }
 
   async addProductToShoppingCart(item: Product) {
-    this.shopService.addProduct(item);
-    await this.presentToastWithOptions(item.name);
-  }
-
-  async presentToastWithOptions(prodName: string) {
-    const toast = await this.toastController.create({
-      header: '¡Añadiste ' + prodName + ' a tu pedido!',
-      message: '',
-      position: 'top',
-      duration: 1000,
-      buttons: [
-        {
-          side: 'start',
-          icon: 'pizza',
-          text: '',
-          handler: () => {
-            console.log('Favorite clicked');
-          }
-        }, {
-          text: 'Cerrar',
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
-          }
-        }
-      ]
-    });
-    await toast.present();
+    await this.shopService.addProduct(item);
   }
 }

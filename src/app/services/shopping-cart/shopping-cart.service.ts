@@ -1,23 +1,25 @@
 import { Injectable } from '@angular/core';
 import {OrderItem} from '../../models/order-item';
 import {Product} from '../../models/product/product';
+import {Store} from '../../models/store';
+import {ToastController} from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShoppingCartService {
   public orderBuilder: OrderItem[] = [];
-  public storeId: string;
+  public store: Store;
   public totalAmount = 0.0;
   public totalProducts = 0;
-  constructor() {
+  constructor(private toastController: ToastController) {
   }
 
   public getCartProducts() {
     return this.orderBuilder;
   }
 
-  public addProduct(item: Product) {
+  public async addProduct(item: Product) {
     let productIsAlready = false;
     let isFirstProduct = false;
 
@@ -26,10 +28,13 @@ export class ShoppingCartService {
     }
 
     if (isFirstProduct) {
-      this.storeId = item.storeId;
+      this.store = item.store;
+      this.addedProductToast(item.name);
     } else {
-      if (item.storeId !== this.storeId) {
+      if (item.store.storeId !== this.store.storeId) {
         console.log('item is not from the same store, not adding');
+        await this.presentInfoToast('¡Oops! No puedes hacer una orden de para varios establecimientos. Elimina o ' +
+            'finaliza tu orden anterior para añadirlo.');
         return;
       }
     }
@@ -88,8 +93,6 @@ export class ShoppingCartService {
         if (orderItem.quantity === 0.0 ) {
           console.log('deleting from list...');
           idToRemove.push(orderItem.product.id);
-          // TODO Create function to delete several ids using a set
-
         }
       }
     }
@@ -100,7 +103,7 @@ export class ShoppingCartService {
   }
 
   public getStore() {
-    return this.storeId;
+    return this.store;
   }
 
   private updateTotal() {
@@ -112,6 +115,50 @@ export class ShoppingCartService {
     }
     this.totalAmount = sum * 1.05;
     this.totalProducts = prods;
+  }
+  async presentInfoToast(msg: string) {
+    const toast = await this.toastController.create({
+      header: msg,
+      message: '',
+      position: 'top',
+      duration: 2000,
+      buttons: [
+        {
+          text: 'Cerrar',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    await toast.present();
+  }
+
+  async addedProductToast(prodName: string) {
+    const toast = await this.toastController.create({
+      header: '¡Añadiste ' + prodName + ' a tu pedido!',
+      message: '',
+      position: 'top',
+      duration: 1000,
+      buttons: [
+        {
+          side: 'start',
+          icon: 'pizza',
+          text: '',
+          handler: () => {
+            console.log('Favorite clicked');
+          }
+        }, {
+          text: 'Cerrar',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    await toast.present();
   }
 }
 

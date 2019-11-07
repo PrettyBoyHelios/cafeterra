@@ -27,7 +27,7 @@
                     <ion-label>
                         <h2>{{item.name}}</h2>
                         <h3>{{item.description}}</h3>
-                        <p>{{item.rating | number:'1.2-2' }} | {{item.storeId}}</p> <!-- TODO replace store ID with Store -->
+                        <p>{{item.rating | number:'1.2-2' }} | {{item.store.storeName}}</p> <!-- TODO replace store ID with Store -->
                     </ion-label>
                     {{item.price | currency:'MXN'}}
                     <ion-ripple-effect></ion-ripple-effect>
