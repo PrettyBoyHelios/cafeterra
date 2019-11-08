@@ -29,6 +29,7 @@ export class FoodPage implements OnInit {
 
   async addProductToShoppingCart(item: Product) {
     await this.shopService.addProduct(item);
+    this.searchTerm = '';
   }
 
   public onSearchTerm() {

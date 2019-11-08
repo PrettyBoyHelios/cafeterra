@@ -3,5 +3,8 @@
   "appName": "cafeterra",
   "bundledWebRuntime": false,
   "npmClient": "yarn",
-  "webDir": "www"
+  "webDir": "www",
+  "server": {
+    "url": "http://10.201.115.187:8101"
+  }
 }
