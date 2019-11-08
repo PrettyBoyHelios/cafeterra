@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AuthService } from "../../services/auth.service";
 import {ProductService} from '../../services/product.service';
 import {Product} from '../../models/product/product';
 import {Store} from '../../models/store';
@@ -12,6 +14,7 @@ import {storage} from 'firebase';
   templateUrl: './food.page.html',
   styleUrls: ['./food.page.scss'],
 })
+
 export class FoodPage implements OnInit {
   private products: Product[];
   private resultProducts: Product[];
@@ -36,6 +39,8 @@ export class FoodPage implements OnInit {
     store: this.store
   };
   constructor(
+      private authService: AuthService,
+      private aufAuth: AngularFireAuth,
       private prodService: ProductService,
       private shopService: ShoppingCartService,
       private router: Router,

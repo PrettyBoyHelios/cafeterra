@@ -1,25 +1,65 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Mi Perfil</ion-title>
+  <ion-toolbar *ngIf="!isLoggedIn" color="primary" class="ion-padding">
+    <ion-title text-center>Iniciar Sesión</ion-title>
   </ion-toolbar>
+  <ion-toolbar *ngIf="loggedIn" color="primary" class="ion-padding">
+    <ion-title text-center>Mi Perfil</ion-title>
+  </ion-toolbar>
+  <ion-content *ngIf="!hasEmailVerification" >
+    <button ion-button (click)="sendEmailVerification()">
+      Resend the email verification
+    </button>
+    <p text-center>Por favor, verifica tu cuenta y refresca.</p>
+  </ion-content>
 </ion-header>
 
-<ion-content>
+<ion-header *ngIf="!hasVerifiedEmail" padding class="verify-email">
+  <div>
+    Por favor, verifica tu cuenta.
+  </div>
+</ion-header>
 
+<ion-content *ngIf="!loggedIn">
+  <img class="icon" src="assets/icon/favicon.png" alt="" padding>
+  <ion-item>
+    <ion-label position="floating" > Correo electrónico</ion-label>
+    <ion-input type="text" [(ngModel)]="email" name="email"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating" > Contraseña</ion-label>
+    <ion-input [(ngModel)]="password" type="password" name="password"></ion-input>
+  </ion-item>
+  <br>
+  <ion-button (click)="onSubmitLogin()" expand="block">Entrar</ion-button>
+  <br>
+  <p text-center routerLink="/tabs/register">Crear cuenta</p>
+  <p text-center padding routerLink="/tabs/forgotpassword">No recuerdo mi contraseña</p>
+</ion-content>
+
+<ion-content *ngIf="isLoggedIn">
   <ion-list>
-    <ion-item>
-      <ion-avatar>
-        <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-      </ion-avatar>
-    </ion-item>
-    <ion-list-header>
-      <ion-label>Items</ion-label>
-    </ion-list-header>
-    <ion-item>Item 1</ion-item>
-    <ion-item>Item 2</ion-item>
-    <ion-item>Item 3</ion-item>
-    <ion-item>Item 4</ion-item>
-    <ion-item>Item 5</ion-item>
+    <ion-menu-toggle auto-hide="false">
+      <ion-item [routerLink]="['/forms-and-validations']">
+        <ion-icon slot="start" name="md-person"></ion-icon>
+        <ion-label>
+          <h2>
+            Hola, {{userNameFromAuth}}
+          </h2>
+          <p>{{userEmail}}</p>
+        </ion-label>
+      </ion-item>
+      <ion-item [routerLink]="['/forms-and-validations']">
+        <ion-icon slot="start" name="md-settings"></ion-icon>
+        <ion-label>
+          Configuración
+        </ion-label>
+      </ion-item>
+      <ion-item [routerLink]="['/forms-filters']">
+        <ion-icon slot="start" name="md-log-out"></ion-icon>
+        <ion-label (click)="Onlogout()">
+          Cerrar sesión
+        </ion-label>
+      </ion-item>
+    </ion-menu-toggle>
   </ion-list>
-
 </ion-content>
