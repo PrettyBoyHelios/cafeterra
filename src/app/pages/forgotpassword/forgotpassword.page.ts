@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from "@angular/fire/auth";
 import { Router } from "@angular/router";
 import { ToastController } from '@ionic/angular';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-forgotpassword',
@@ -11,7 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class ForgotpasswordPage implements OnInit {
   public  email : string;
-  constructor(private translate: TranslateService, private fauthService: AngularFireAuth, public router: Router, public toastController: ToastController) { 
+  constructor(private fauthService: AngularFireAuth, public router: Router, public toastController: ToastController) { 
   }
 
   ngOnInit() {
@@ -30,9 +29,8 @@ export class ForgotpasswordPage implements OnInit {
   }
 
   async presentToast(message: string, closeBoton:boolean, position:any, duration: number) {
-    let message_translated:string = this.translate.instant(message);
     const toast = await this.toastController.create({
-      message: message_translated,
+      message: message,
       duration: duration,
       position: position,
       showCloseButton: closeBoton

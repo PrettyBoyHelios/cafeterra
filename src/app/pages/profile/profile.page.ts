@@ -5,7 +5,6 @@ import { Router } from "@angular/router";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore } from "@angular/fire/firestore";
 import { ToastController } from '@ionic/angular';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-profile',
@@ -22,7 +21,7 @@ export class ProfilePage implements OnInit {
   userNameFromAuth : string;
   public hasEmailVerification : boolean = true;
 
-  constructor(private translate: TranslateService, public toastController: ToastController, public userInfoService: UserInfoService, private db : AngularFirestore, private authService: AuthService, private fauthService: AngularFireAuth, public router: Router) { 
+  constructor( public toastController: ToastController, public userInfoService: UserInfoService, private db : AngularFirestore, private authService: AuthService, private fauthService: AngularFireAuth, public router: Router) { 
     this.getName();
   }
 
@@ -60,9 +59,8 @@ export class ProfilePage implements OnInit {
   }
 
   async presentToast(message: string, closeBoton:boolean, position:any, duration: number) {
-    let message_translated:string = this.translate.instant(message);
     const toast = await this.toastController.create({
-      message: message_translated,
+      message: message,
       duration: duration,
       position: position,
       showCloseButton: closeBoton

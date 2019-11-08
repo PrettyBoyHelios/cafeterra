@@ -1,12 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from "@angular/fire/auth";
-import { Router } from "@angular/router";
 import { AngularFirestore } from "@angular/fire/firestore";
 import * as firebase from 'firebase/app';
-import { Observable } from 'rxjs/Observable';
 import { ToastController } from '@ionic/angular';
 import { UserInfoService } from '../services/user-info.service';
-import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +15,7 @@ export class AuthService {
   public suNombre: any = "";
   isVerified = false;
 
-  constructor(private translate: TranslateService, private userinfo:UserInfoService, private authService:AngularFireAuth, private db : AngularFirestore, public toastController: ToastController) { }
+  constructor(private userinfo:UserInfoService, private authService:AngularFireAuth, private db : AngularFirestore, public toastController: ToastController) { }
 
   login(email:string, password:string){
     return new Promise((resolve, rejected) =>{
@@ -82,9 +79,8 @@ export class AuthService {
   }
 
   async presentToast(message: string, closeBoton:boolean, position:any, duration: number) {
-    let message_translated:string = this.translate.instant(message);
     const toast = await this.toastController.create({
-      message: message_translated,
+      message: message,
       duration: duration,
       position: position,
       showCloseButton: closeBoton
