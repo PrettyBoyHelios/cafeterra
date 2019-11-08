@@ -1,9 +1,11 @@
 import {OrderItem} from './order-item';
-import {Store} from './store';
 
-export class Order {
-    id: string;
+export interface Order {
+    id?: string;
     totalAmount: number;
-    items: OrderItem[];
-    store: Store;
+    products: OrderItem[];
+    storeId: string;
+    userId: string;
+    status: string;
+    timeCreated: number;
 }

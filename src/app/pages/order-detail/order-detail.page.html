@@ -1,0 +1,12 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Orden</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <app-order [details]="details" [order]="order"></app-order>
+  <ion-button color="danger" (click)="dismiss()" expand="block">
+    Regresar
+  </ion-button>
+</ion-content>

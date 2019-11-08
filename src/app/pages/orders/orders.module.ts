@@ -7,6 +7,8 @@ import { IonicModule } from '@ionic/angular';
 
 import { OrdersPage } from './orders.page';
 import {OrderComponent} from '../../components/order/order.component';
+import {OrderDetailPage} from '../order-detail/order-detail.page';
+import {NgxQRCodeModule} from 'ngx-qrcode2';
 
 const routes: Routes = [
   {
@@ -16,12 +18,14 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    RouterModule.forChild(routes)
-  ],
-    declarations: [OrdersPage, OrderComponent]
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        RouterModule.forChild(routes),
+        NgxQRCodeModule
+    ],
+  declarations: [OrdersPage, OrderComponent, OrderDetailPage],
+  entryComponents: [OrderDetailPage]
 })
 export class OrdersPageModule {}

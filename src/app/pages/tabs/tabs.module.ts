@@ -34,7 +34,10 @@ const routes: Routes = [
       {
         path: 'forgotpassword',
         loadChildren: '../forgotpassword/forgotpassword.module#ForgotpasswordPageModule'
-      }
+      },
+      { path: 'shopping-cart',
+        loadChildren: '../shopping-cart/shopping-cart.module#ShoppingCartPageModule'
+      },
     ]
   },
   {

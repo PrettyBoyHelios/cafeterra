@@ -1,7 +1,8 @@
 {
   "name": "cafeterra",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {},
+    "cordova": {}
   },
   "type": "angular"
 }

@@ -30,5 +30,6 @@ npm-debug.log*
 /plugins
 /www
 /ios/*
-config.xml
+/src/environments/*.ts
 /resources/*
+config.xml
