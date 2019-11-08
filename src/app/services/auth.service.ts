@@ -3,7 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import * as firebase from 'firebase/app';
 import { ToastController } from '@ionic/angular';
-import { UserInfoService } from '../services/user-info.service';
+import { UserInfoService } from './user-info.service';
 
 @Injectable({
   providedIn: 'root'
