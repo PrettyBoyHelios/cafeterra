@@ -19,8 +19,8 @@ export class FoodPage implements OnInit {
   private searchTerm: string;
   private isSearching = false;
   constructor(
-      private authService:AuthService,
-      private aufAuth : AngularFireAuth,
+      private authService: AuthService,
+      private aufAuth: AngularFireAuth,
       private prodService: ProductService,
       private shopService: ShoppingCartService,
       private router: Router,
