@@ -5,6 +5,8 @@ import { AngularFirestore } from "@angular/fire/firestore";
 import * as firebase from 'firebase/app';
 import { Observable } from 'rxjs/Observable';
 import { ToastController } from '@ionic/angular';
+import { UserInfoService } from '../services/user-info.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +18,7 @@ export class AuthService {
   public suNombre: any = "";
   isVerified = false;
 
-  constructor(private authService:AngularFireAuth, private db : AngularFirestore, public toastController: ToastController) { }
+  constructor(private translate: TranslateService, private userinfo:UserInfoService, private authService:AngularFireAuth, private db : AngularFirestore, public toastController: ToastController) { }
 
   login(email:string, password:string){
     return new Promise((resolve, rejected) =>{
@@ -26,6 +28,8 @@ export class AuthService {
           // Redirect the user here
           console.log("verificado");
           this.isVerified = true;
+          this.userinfo.getUserInfo();
+          this.suNombre = this.userinfo.userName;
         } else {
           this.presentToast('Se envió un correo para verificar tu cuenta.', false, 'bottom', 2000);
           // Tell the user to have a look at its mailbox
@@ -42,7 +46,8 @@ export class AuthService {
         this.sendEmailVerification();
         this.db.collection('users').doc(uid).set({
           name : name,
-          uid : uid
+          uid : uid,
+          isClient: true
         })
         resolve(res)
       }).catch( err => reject(err))
@@ -77,8 +82,9 @@ export class AuthService {
   }
 
   async presentToast(message: string, closeBoton:boolean, position:any, duration: number) {
+    let message_translated:string = this.translate.instant(message);
     const toast = await this.toastController.create({
-      message: message,
+      message: message_translated,
       duration: duration,
       position: position,
       showCloseButton: closeBoton

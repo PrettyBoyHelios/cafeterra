@@ -3,13 +3,9 @@ import { AuthService } from "../../services/auth.service";
 import { UserInfoService } from "../../services/user-info.service";
 import { Router } from "@angular/router";
 import { AngularFireAuth } from "@angular/fire/auth";
-import { FirebaseAuth } from '@angular/fire';
 import { AngularFirestore } from "@angular/fire/firestore";
-import { async } from 'rxjs/internal/scheduler/async';
-import { Subject } from 'rxjs';
-
-import { ModalController } from "@ionic/angular";
-import { ActionSheetController } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-profile',
@@ -26,65 +22,51 @@ export class ProfilePage implements OnInit {
   userNameFromAuth : string;
   public hasEmailVerification : boolean = true;
 
-  constructor(public userInfoService: UserInfoService, private db : AngularFirestore, public userService: UserInfoService, private authService: AuthService, private fauthService: AngularFireAuth, public router: Router) { 
-    //this.hasEmailVerification = this.authService.isVerified;
-    //this.hasEmailVerification = fauthService.auth.currentUser.emailVerified;
-    //console.log("verified: "+this.hasEmailVerification);
-    // //this.isLoggedIn = this.authService.isLoggedIn;
-    // fauthService.auth.onAuthStateChanged(function(user) {
-    //   if (user) {
-    //     this.loggedIn = this.authService.isLoggedIn;
-    //     this.userEmail = this.authService.userDetails().email;
-    //     this.userNameFromAuth = this.userInfoService.userName;
-    //     //this.hasEmailVerification = this.fauthService.auth.currentUser.emailVerified;
-    //     // User is signed in.
-    //   } else {
-    //     console.log("notlogged")
-    //     // No user is signed in.
-    //   }
-    // });
+  constructor(private translate: TranslateService, public toastController: ToastController, public userInfoService: UserInfoService, private db : AngularFirestore, private authService: AuthService, private fauthService: AngularFireAuth, public router: Router) { 
+    this.getName();
   }
 
   ngOnInit(){   
-    // this.userNameFromAuth = this.userInfoService.userName;
-    // this.isLoggedIn = this.authService.isLoggedIn;
-    //this.userEmail = this.authService.userDetails().email;
+    this.getName();
   }
 
   ionViewWillEnter(){
-    // this.isLoggedIn = this.authService.isLoggedIn;
-    // this.userEmail = this.authService.userDetails().email;
-    // this.userNameFromAuth = this.userInfoService.userName;
-    //this.hasEmailVerification = this.fauthService.auth.currentUser.emailVerified;
-    //this.userNameFromAuth = this.authService.userName;
-    //this.userName = this.authService.userDetails().email.split('@')[0];
-    //this.userName = this.authService.userDetails().displayName;
-    //this.userName = user.displayName;
-    //console.log(this.userNameFromAuth + " - " + this.userEmail + " - " + this.loggedIn);
+    this.getName();
   }
 
   onSubmitLogin()
   {
     this.authService.login(this.email, this.password).then( res =>{
-      //console.log("Log In exitoso");
       this.isLoggedIn = true;
       this.hasEmailVerification = this.authService.isVerified;
-      this.userNameFromAuth = this.userInfoService.userName;
+      this.getName();
       this.router.navigate(['/tabs/food/']);
-      if(!this.fauthService.auth.currentUser.emailVerified)
-        console.log("Please verify");
-    }).catch(err => alert('los datos son incorrectos o no existe el usuario'))
-
+    }).catch(err => this.presentToast('Por favor verifique sus datos y que el usuario exista.', false, 'bottom', 2000));
   }
 
   Onlogout(){
-    console.log("Saliste de la sesión");
-    this.authService.logoutUser();
     this.reload();
-    //this.router.navigate(['/tabs/profile/']);
   }
 
   reload() {
+    this.getName();
     window.location.reload();
+  }
+
+  async getName(){
+    this.userInfoService.getUserInfo().subscribe( user => {
+      this.userNameFromAuth = user[0];
+    })
+  }
+
+  async presentToast(message: string, closeBoton:boolean, position:any, duration: number) {
+    let message_translated:string = this.translate.instant(message);
+    const toast = await this.toastController.create({
+      message: message_translated,
+      duration: duration,
+      position: position,
+      showCloseButton: closeBoton
+    });
+    toast.present();
   }
 }

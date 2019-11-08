@@ -5,7 +5,12 @@
   <ion-toolbar *ngIf="isLoggedIn" color="primary" class="ion-padding">
     <ion-title text-center>Sesión Iniciada</ion-title>
   </ion-toolbar>
-  <p *ngIf="!hasEmailVerification" text-center>Por favor, verifica tu cuenta y refresca.</p>
+  <ion-content *ngIf="!hasEmailVerification" >
+    <button ion-button (click)="sendEmailVerification()">
+      Resend the email verification
+    </button>
+    <p text-center>Por favor, verifica tu cuenta y refresca.</p>
+  </ion-content>
 </ion-header>
 
 <ion-content *ngIf="!isLoggedIn">

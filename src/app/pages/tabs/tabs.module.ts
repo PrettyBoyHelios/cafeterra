@@ -21,7 +21,8 @@ const routes: Routes = [
       },
       {
         path: 'orders',
-        loadChildren: '../orders/orders.module#OrdersPageModule'
+        loadChildren: '../orders/orders.module#OrdersPageModule',
+        canActivate: [NoLoginGuard]
       },
       {
         path: 'profile',
