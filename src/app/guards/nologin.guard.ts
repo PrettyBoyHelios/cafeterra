@@ -20,8 +20,7 @@ export class NoLoginGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
       const currentUser = this.authService.isLoggedIn;
-      if (currentUser) {
-        console.log("Autorizado");
+      if (currentUser && this.authService.isVerified) {
           // authorised so return true
           return true;
       }

@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from "../../services/auth.service";
+import { UserInfoService } from "../../services/user-info.service";
 import { Router } from "@angular/router";
 import { AngularFireAuth } from "@angular/fire/auth";
-import { FirebaseAuth } from '@angular/fire';
 import { AngularFirestore } from "@angular/fire/firestore";
-import { async } from 'rxjs/internal/scheduler/async';
-import { Subject } from 'rxjs';
-
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-profile',
@@ -15,77 +13,58 @@ import { Subject } from 'rxjs';
 })
 
 export class ProfilePage implements OnInit {
+  email: string = "";
   userEmail: string;
-  email: string;
   password: string;
   currentUser : any;
-  loggedIn : boolean;
-  userNameFromAuth$ = new Subject<string>();
-  hasEmailVerification : boolean;
+  isLoggedIn : boolean;
+  userNameFromAuth : string;
+  public hasEmailVerification : boolean = true;
 
-  constructor(private db : AngularFirestore, private authService: AuthService, private fauthService: AngularFireAuth, public router: Router) { 
-    //this.loggedIn = this.authService.isLoggedIn;
-
-    fauthService.auth.onAuthStateChanged(function(user) {
-      if (user) {
-        console.log("logged");
-        this.loggedIn = this.authService.isLoggedIn;
-        this.userEmail = this.authService.userDetails().email;
-        // User is signed in.
-      } else {
-        console.log("notlogged")
-        // No user is signed in.
-      }
-    });
-  }
-
-  verifyEmail(){
-    this.fauthService.authState.subscribe(user =>{
-      if(user){
-        this.hasEmailVerification = this.fauthService.auth.currentUser.emailVerified;
-        if(this.hasEmailVerification){
-          this.onSubmitLogin();
-        }
-      }
-    });
+  constructor( public toastController: ToastController, public userInfoService: UserInfoService, private db : AngularFirestore, private authService: AuthService, private fauthService: AngularFireAuth, public router: Router) { 
+    this.getName();
   }
 
   ngOnInit(){   
-
+    this.getName();
   }
 
   ionViewWillEnter(){
-    this.loggedIn = this.authService.isLoggedIn;
-    this.userEmail = this.authService.userDetails().email;
-    //this.userNameFromAuth = this.authService.userName;
-    //this.userName = this.authService.userDetails().email.split('@')[0];
-    //this.userName = this.authService.userDetails().displayName;
-    //this.userName = user.displayName;
-    //console.log(this.userNameFromAuth + " - " + this.userEmail + " - " + this.loggedIn);
+    this.getName();
   }
 
   onSubmitLogin()
   {
     this.authService.login(this.email, this.password).then( res =>{
-      console.log("Log In exitoso");
-      //this.loggedIn = true;
-     // console.log(this.getUsername());
-
-      
+      this.isLoggedIn = true;
+      this.hasEmailVerification = this.authService.isVerified;
+      this.getName();
       this.router.navigate(['/tabs/food/']);
-    }).catch(err => alert('los datos son incorrectos o no existe el usuario'))
-
+    }).catch(err => this.presentToast('Por favor verifique sus datos y que el usuario exista.', false, 'bottom', 2000));
   }
 
   Onlogout(){
-    console.log("Saliste de la sesión");
-    this.authService.logoutUser();
     this.reload();
-    //this.router.navigate(['/tabs/profile/']);
   }
 
   reload() {
+    this.getName();
     window.location.reload();
   }
-  
+
+  async getName(){
+    this.userInfoService.getUserInfo().subscribe( user => {
+      this.userNameFromAuth = user[0];
+    })
+  }
+
+  async presentToast(message: string, closeBoton:boolean, position:any, duration: number) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: duration,
+      position: position,
+      showCloseButton: closeBoton
+    });
+    toast.present();
+  }
 }
