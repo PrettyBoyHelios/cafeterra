@@ -1,4 +1,4 @@
-<ion-card>
+<ion-card class="ion-activatable">
   <div *ngIf="details">
     <ngx-qrcode
             [qrc-element-type]="'url'"
@@ -11,8 +11,8 @@
   <ion-card-header>
     <ion-card-subtitle>{{order.timeCreated | date: 'dd MMMM yyyy H:mm'}}</ion-card-subtitle>
     <div class="inline">
-      <ion-card-title class="ion-align-items-start">{{order.storeId}}</ion-card-title>
-      <ion-card-title class="ion-align-items-end">{{order.totalAmount | currency: 'MXN' }}</ion-card-title>
+      <ion-card-title class="ion-align-items-start">{{order.store.storeName}}</ion-card-title>
+      <h2>{{order.totalAmount | currency: 'MXN' }}</h2>
     </div>
 
   </ion-card-header>
@@ -29,4 +29,5 @@
       <ion-icon *ngIf="order.status==='approved'" name="checkmark-circle-outline"></ion-icon>
     </ion-item>
   </ion-card-content>
+  <ion-ripple-effect></ion-ripple-effect>
 </ion-card>

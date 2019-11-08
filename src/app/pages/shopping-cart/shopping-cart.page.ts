@@ -3,6 +3,7 @@ import {ShoppingCartService} from '../../services/shopping-cart/shopping-cart.se
 import {OrderItem} from '../../models/order-item';
 import {OrderService} from '../../services/order/order.service';
 import {ToastController} from '@ionic/angular';
+import {Store} from '../../models/store';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -24,8 +25,8 @@ export class ShoppingCartPage implements OnInit {
     this.shopService.removeItemFromOrder(id);
   }
 
-  public async createOrder(items: OrderItem[], storeId: string) {
-    this.orderService.addOrder(items, storeId);
+  public async createOrder(items: OrderItem[], store: Store) {
+    this.orderService.addOrder(items, store);
     this.shopService.cancelWholeOrder();
     await this.presentToastWithOptions();
   }

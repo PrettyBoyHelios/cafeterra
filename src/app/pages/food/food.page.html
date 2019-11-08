@@ -8,13 +8,13 @@
     <ion-text color="#AAAAAA" style="font-size: 2em; margin-left: 20px;text-align: center">
         <h1>Recomendaciones</h1>
     </ion-text>
-    <ion-searchbar animated></ion-searchbar>
+    <ion-searchbar animated [(ngModel)]="searchTerm" (ionChange)="onSearchTerm()" placeholder="Search an item"></ion-searchbar>
 
     <!-- Day's Special Items -->
-    <app-food-item></app-food-item>
+    <app-food-item *ngIf="!isSearching"></app-food-item>
 
     <!-- All Items TODO Limit to 20 -->
-    <ion-list>
+    <ion-list *ngIf="!isSearching">
         <ion-list-header>
             Todos los Productos
         </ion-list-header>
@@ -27,7 +27,29 @@
                     <ion-label>
                         <h2>{{item.name}}</h2>
                         <h3>{{item.description}}</h3>
-                        <p>{{item.rating | number:'1.2-2' }} | {{item.storeId}}</p> <!-- TODO replace store ID with Store -->
+                        <p>{{item.rating | number:'1.2-2' }} | {{item.store.storeName}}</p> <!-- TODO replace store ID with Store -->
+                    </ion-label>
+                    {{item.price | currency:'MXN'}}
+                    <ion-ripple-effect></ion-ripple-effect>
+                </ion-item>
+                <ion-ripple-effect></ion-ripple-effect>
+            </div>
+        </div>
+    </ion-list>
+    <ion-list *ngIf="isSearching">
+        <ion-list-header>
+            Resultados de Búsqueda
+        </ion-list-header>
+        <div *ngFor="let item of resultProducts">
+            <div class="ion-activatable">
+                <ion-item *ngIf="item.available" (click)="addProductToShoppingCart(item)">
+                    <ion-thumbnail slot="start">
+                        <img src="{{item.image}}" alt="{{item.description}}">
+                    </ion-thumbnail>
+                    <ion-label>
+                        <h2>{{item.name}}</h2>
+                        <h3>{{item.description}}</h3>
+                        <p>{{item.rating | number:'1.2-2' }} | {{item.store.storeName}}</p> <!-- TODO replace store ID with Store -->
                     </ion-label>
                     {{item.price | currency:'MXN'}}
                     <ion-ripple-effect></ion-ripple-effect>
