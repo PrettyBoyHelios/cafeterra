@@ -11,9 +11,8 @@ import { UserInfoService } from '../services/user-info.service';
 
 export class AuthService {
   isLoggedIn = false;
-  public hasEmailVerified: boolean = false;
   public suNombre: any = "";
-  isVerified = false;
+  isVerified : boolean;
 
   constructor(private userinfo:UserInfoService, private authService:AngularFireAuth, private db : AngularFirestore, public toastController: ToastController) { }
 
@@ -22,14 +21,11 @@ export class AuthService {
       this.authService.auth.signInWithEmailAndPassword(email, password).then(user => {
         this.isLoggedIn = true;
         if(user.user.emailVerified) {
-          // Redirect the user here
-          console.log("verificado");
           this.isVerified = true;
           this.userinfo.getUserInfo();
           this.suNombre = this.userinfo.userName;
         } else {
           this.presentToast('Se envió un correo para verificar tu cuenta.', false, 'bottom', 2000);
-          // Tell the user to have a look at its mailbox
         }
         resolve(user);
       }).catch(err => rejected(err));

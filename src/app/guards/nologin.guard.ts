@@ -21,10 +21,8 @@ export class NoLoginGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
       const currentUser = this.authService.isLoggedIn;
       if (currentUser && this.authService.isVerified) {
-          // authorised so return true
           return true;
       }
-      // not logged in so redirect to login page with the return url
       this.router.navigate(['/tabs/profile']);
       return false;
   }
