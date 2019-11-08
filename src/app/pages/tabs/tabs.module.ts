@@ -37,7 +37,8 @@ const routes: Routes = [
         loadChildren: '../forgotpassword/forgotpassword.module#ForgotpasswordPageModule'
       },
       { path: 'shopping-cart',
-        loadChildren: '../shopping-cart/shopping-cart.module#ShoppingCartPageModule'
+        loadChildren: '../shopping-cart/shopping-cart.module#ShoppingCartPageModule',
+        canActivate: [NoLoginGuard]
       },
     ]
   },
