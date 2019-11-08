@@ -3,6 +3,7 @@ import { AngularFirestore, AngularFirestoreCollection} from '@angular/fire/fires
 import { Observable} from 'rxjs';
 import { map } from 'rxjs/operators';
 import {Product} from '../models/product/product';
+import * as firebase from 'firebase';
 
 @Injectable({
   providedIn: 'root'
@@ -29,5 +30,11 @@ export class ProductService {
 
   public getProduct(id: string) {
     return this.productCollection.doc<Product>(id).valueChanges();
+  }
+
+  public addProduct(newProduct: Product) {
+    console.log(newProduct);
+    newProduct.store.storeName = '';
+    this.productCollection.add(newProduct).then(r => console.log(r));
   }
 }

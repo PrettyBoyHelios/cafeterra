@@ -5,6 +5,26 @@
 </ion-header>
 
 <ion-content>
+    <ion-item>
+        <ion-label position="floating" >Nombre de producto</ion-label>
+        <ion-input type="text" [(ngModel)]="name" name="name"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label position="floating" >Precio</ion-label>
+        <ion-input type="number" [(ngModel)]="price" name="price"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label position="floating" >Descripcion</ion-label>
+        <ion-input type="text" [(ngModel)]="description" name="description"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label position="floating" >Cantidad</ion-label>
+        <ion-input type="number" [(ngModel)]="amount" name="amount"></ion-input>
+    </ion-item>
+    <br>
+    <ion-button (click)="addProductToDB()" expand="block">Agregar Producto</ion-button>
+    <br>
+
     <ion-text color="#AAAAAA" style="font-size: 2em; margin-left: 20px;text-align: center">
         <h1>Recomendaciones</h1>
     </ion-text>
