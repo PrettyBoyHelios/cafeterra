@@ -4,9 +4,9 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-  <app-order [details]="details" [order]="order"></app-order>
+<ion-content class="ion-padding">
   <ion-button color="danger" (click)="dismiss()" expand="block">
     Regresar
   </ion-button>
+  <app-order [details]="details" [order]="order"></app-order>
 </ion-content>

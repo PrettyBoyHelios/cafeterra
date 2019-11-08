@@ -29,7 +29,7 @@ export class OrderService {
     return this.orders;
   }
 
-  public addOrder(items: OrderItem[], store: string) {
+  public addOrder(items: OrderItem[], store: Store) {
     const userId = 'pending';
     let sum = 0.0;
     /* const s: Store = {
@@ -42,7 +42,7 @@ export class OrderService {
     const order: Order = {
       products: items,
       userId,
-      storeId: store,
+      store,
       totalAmount: sum,
       status: 'approved',
       timeCreated: Math.round((new Date()).getTime()),
