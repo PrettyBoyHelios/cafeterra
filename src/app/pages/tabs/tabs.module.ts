@@ -6,6 +6,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { TabsPage } from './tabs.page';
+import { AuthGuard } from 'src/app/guards/auth.guard';
+import { NoLoginGuard } from '../../guards/nologin.guard'
 
 const routes: Routes = [
   {
@@ -14,25 +16,34 @@ const routes: Routes = [
     children: [
       {
         path: 'food',
-        loadChildren: '../food/food.module#FoodPageModule'
+        loadChildren: '../food/food.module#FoodPageModule',
+        canActivate: [NoLoginGuard]
       },
       {
         path: 'orders',
-        loadChildren: '../orders/orders.module#OrdersPageModule'
+        loadChildren: '../orders/orders.module#OrdersPageModule',
+        canActivate: [NoLoginGuard]
       },
       {
         path: 'profile',
         loadChildren: '../profile/profile.module#ProfilePageModule'
       },
+      {
+        path: 'register',
+        loadChildren: '../register/register.module#RegisterPageModule'
+      },
+      {
+        path: 'forgotpassword',
+        loadChildren: '../forgotpassword/forgotpassword.module#ForgotpasswordPageModule'
+      },
       { path: 'shopping-cart',
         loadChildren: '../shopping-cart/shopping-cart.module#ShoppingCartPageModule'
       },
-      // { path: 'orders/order-detail', loadChildren: '../order-detail/order-detail.module#OrderDetailPageModule' },
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/food'
+    redirectTo: '/tabs/profile'
   }
 ];
 
