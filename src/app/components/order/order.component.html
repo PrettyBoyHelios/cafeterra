@@ -9,18 +9,27 @@
   </div>
 
   <ion-card-header>
-    <ion-card-subtitle>{{order.timeCreated | date: 'dd MMMM yyyy H:mm'}}</ion-card-subtitle>
+    <ion-card-subtitle>
+      {{order.timeCreated | date: 'dd MMMM yyyy H:mm'}} <!--{{order.id}}-->
+    </ion-card-subtitle>
     <div class="inline">
       <div *ngIf="showClient">
         <ion-card-title class="ion-align-items-start">
-          <ion-icon *ngIf="order.status==='approved'" name="checkmark-circle-outline"></ion-icon>
-          {{order.store.storeName}}
+          {{order.storeName}}
         </ion-card-title>
       </div>
       <div *ngIf="!showClient">
         <ion-card-title class="ion-align-items-start">{{order.nameClient}}</ion-card-title>
       </div>
-      <h2>{{order.totalAmount | currency: 'MXN' }}</h2>
+        <ion-label>
+
+          <h2>
+            <ion-icon *ngIf="order.status==='approved'" name="checkmark-circle-outline"></ion-icon>
+            <ion-icon *ngIf="order.status==='prepared'" color="success" name="checkmark-circle-outline"></ion-icon>
+            <ion-icon *ngIf="order.status==='delivered'" color="success" name="checkmark-circle"></ion-icon>
+            {{order.totalAmount | currency: 'MXN' }}
+          </h2>
+        </ion-label>
     </div>
 
   </ion-card-header>

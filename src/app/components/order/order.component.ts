@@ -17,10 +17,7 @@ export class OrderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.showClient = true;
-    if (localStorage.getItem('showClient') === 'false') {
-      this.showClient = false;
-    }
+    this.showClient = localStorage.getItem('showClient') !== 'false';
   }
 
 }

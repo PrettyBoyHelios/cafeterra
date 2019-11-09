@@ -10,4 +10,5 @@ export interface Order {
     status?: string;
     timeCreated?: number;
     nameClient?: string;
+    storeName?: string;
 }

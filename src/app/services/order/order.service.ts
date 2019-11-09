@@ -35,14 +35,17 @@ export class OrderService {
       storeName: 'pending',
       id: store,
     }; */
+    let aux = '';
     for (const item of items) {
       sum += item.quantity * item.product.price;
+      aux = item.product.storeName;
     }
     const order: Order = {
       nameClient: localStorage.getItem('name'),
       products: items,
       userId: uid,
       store,
+      storeName: aux,
       totalAmount: sum,
       status: 'approved',
       timeCreated: Math.round((new Date()).getTime()),

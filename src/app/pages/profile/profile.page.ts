@@ -45,6 +45,7 @@ export class ProfilePage implements OnInit {
       this.hasEmailVerification = this.authService.isVerified;
       this.getName();
       this.router.navigate(['/tabs/food/']);
+      localStorage.setItem('name', this.fauthService.auth.currentUser.displayName);
     }).catch(err => this.presentToast('Por favor verifique sus datos y que el usuario exista.', false, 'bottom', 2000));
   }
 
