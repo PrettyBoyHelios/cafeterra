@@ -44,6 +44,11 @@ export class OrdersPage implements OnInit {
   torchEnabled = false;
   torchAvailable$ = new BehaviorSubject<boolean>(false);
   tryHarder = false;
+  private userUid: string;
+
+  private showClient: boolean;
+
+  // Vendor Variables
 
   constructor(
       private orderService: OrderService,
@@ -74,6 +79,12 @@ export class OrdersPage implements OnInit {
       });
       this.orders = res;
     });
+
+    this.userInfoService.getUserType().subscribe( res => {
+      this.userUid = res.uid;
+    });
+
+    this.showClient = (localStorage.getItem('showClient') === 'true');
   }
 
   async showOrderDetails(o: Order) {

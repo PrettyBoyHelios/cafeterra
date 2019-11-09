@@ -7,6 +7,7 @@ import {Order} from '../../models/order';
   styleUrls: ['./order.component.scss'],
 })
 export class OrderComponent implements OnInit {
+  private showClient: boolean;
   @Input() order: Order;
   @Input() details: boolean;
   private qrData: string;
@@ -16,6 +17,7 @@ export class OrderComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.showClient = localStorage.getItem('showClient') !== 'false';
   }
 
 }

@@ -2,8 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import {ShoppingCartService} from '../../services/shopping-cart/shopping-cart.service';
 import {OrderItem} from '../../models/order-item';
 import {OrderService} from '../../services/order/order.service';
-import {ToastController} from '@ionic/angular';
+import {ModalController, ToastController} from '@ionic/angular';
 import {Store} from '../../models/store';
+import {UserInfoService} from '../../services/user-info.service';
+import {Order} from '../../models/order';
+import {OrderDetailPage} from '../order-detail/order-detail.page';
+import {OrderVendorPage} from '../order-vendor/order-vendor.page';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -11,14 +15,34 @@ import {Store} from '../../models/store';
   styleUrls: ['./shopping-cart.page.scss'],
 })
 export class ShoppingCartPage implements OnInit {
-  private store: string;
+  private userId = '';
+  private showClient: boolean;
+  private orders: Order[] = [];
   constructor(
       private shopService: ShoppingCartService,
       private orderService: OrderService,
       private toastController: ToastController,
+      private userInfoService: UserInfoService,
+      private modalController: ModalController,
   ) { }
 
   ngOnInit() {
+    this.orderService.getOrders().subscribe( res => {
+      res.sort((a, b) => {
+        if (a.timeCreated > b.timeCreated) {
+          return -1;
+        }
+        if (b.timeCreated > a.timeCreated) {
+          return 1;
+        }
+        return 0;
+      });
+      this.orders = res;
+    });
+    this.userInfoService.getUserType().subscribe( res => {
+      this.userId = res.uid;
+    });
+    this.showClient = (localStorage.getItem('showClient') === 'true');
   }
 
   public deleteItem(id: string) {
@@ -26,7 +50,7 @@ export class ShoppingCartPage implements OnInit {
   }
 
   public async createOrder(items: OrderItem[], store: Store) {
-    this.orderService.addOrder(items, store);
+    this.orderService.addOrder(items, store, this.userId);
     this.shopService.cancelWholeOrder();
     await this.presentToastWithOptions();
   }
@@ -54,5 +78,16 @@ export class ShoppingCartPage implements OnInit {
       ]
     });
     await toast.present();
+  }
+
+  async showOrderDetailsVendor(o: Order) {
+    const modal = await this.modalController.create({
+      component: OrderVendorPage,
+      componentProps: {
+        order: o,
+        details: true,
+      }
+    });
+    return await modal.present();
   }
 }

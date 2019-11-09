@@ -1,16 +1,10 @@
 <ion-card class="ion-activatable">
   <div *ngIf="details">
-    <ngx-qrcode
-            [qrc-element-type]="'url'"
-            [qrc-value] = "order.id"
-            qrc-class = "aclass"
-            qrc-errorCorrectionLevel = "H">
-    </ngx-qrcode>
   </div>
 
   <ion-card-header>
     <ion-card-subtitle>
-      {{order.timeCreated | date: 'dd MMMM yyyy H:mm'}} <!--{{order.id}}-->
+      {{order.timeCreated | date: 'dd MMMM yyyy H:mm'}} {{order.id}}
     </ion-card-subtitle>
     <div class="inline">
       <div *ngIf="showClient">
@@ -19,17 +13,17 @@
         </ion-card-title>
       </div>
       <div *ngIf="!showClient">
-        <ion-card-title class="ion-align-items-start">{{order.nameClient}}</ion-card-title>
+        <ion-card-title class="ion-align-items-start"> <ion-icon name="clock"></ion-icon>{{order.nameClient}}</ion-card-title>
       </div>
-        <ion-label>
+      <ion-label>
 
-          <h2>
-            <ion-icon *ngIf="order.status==='approved'" name="checkmark-circle-outline"></ion-icon>
-            <ion-icon *ngIf="order.status==='prepared'" color="success" name="checkmark-circle-outline"></ion-icon>
-            <ion-icon *ngIf="order.status==='delivered'" color="success" name="checkmark-circle"></ion-icon>
-            {{order.totalAmount | currency: 'MXN' }}
-          </h2>
-        </ion-label>
+        <h2>
+          <ion-icon *ngIf="order.status==='approved'" name="checkmark-circle-outline"></ion-icon>
+          <ion-icon *ngIf="order.status==='prepared'" color="success" name="checkmark-circle-outline"></ion-icon>
+          <ion-icon *ngIf="order.status==='delivered'" color="success" name="checkmark-circle"></ion-icon>
+          {{order.totalAmount | currency: 'MXN' }}
+        </h2>
+      </ion-label>
     </div>
 
   </ion-card-header>

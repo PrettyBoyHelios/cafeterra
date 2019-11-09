@@ -1,10 +1,11 @@
-<ion-header>
+
+<ion-header *ngIf="showClient">
   <ion-toolbar>
     <ion-title>Mi Carrito</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="showClient">
   <div *ngIf="shopService.totalProducts > 0">
     <ion-list>
       <ion-list-header>
@@ -38,7 +39,7 @@
           <h1>
             {{shopService.totalAmount | currency:'MXN'}}
           </h1>
-
+          <h5>Pago en efectivo</h5>
         </ion-label>
       </ion-item>
     </ion-list>
@@ -52,5 +53,19 @@
   <div *ngIf="shopService.totalProducts === 0" class="ion-padding">
     No has agregado productos. Por favor dirígete a la pestaña de alimentos y selecciona el primero. ¡Estamos ansiosos de atenderte!
   </div>
+</ion-content>
 
+
+<ion-header *ngIf="!showClient">
+  <ion-toolbar>
+    <ion-title>Pedidos</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content *ngIf="!showClient">
+<ion-list *ngIf="!showClient">
+  <ion-list-header>Pedidos Pendientes</ion-list-header>
+    <div *ngFor="let order of orders" >
+      <app-vendor-order *ngIf="order.status!=='delivered'" [order]="order" (click)="showOrderDetailsVendor(order)"></app-vendor-order>
+    </div>
+  </ion-list>
 </ion-content>

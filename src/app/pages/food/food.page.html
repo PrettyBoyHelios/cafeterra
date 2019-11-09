@@ -1,15 +1,51 @@
-<ion-header translucent>
-  <ion-toolbar>
-    <ion-title>Alimentos</ion-title>
-  </ion-toolbar>
+
+<ion-header *ngIf="!showClient">
+    <ion-toolbar>
+        <ion-title>CRUD Productos</ion-title>
+    </ion-toolbar>
 </ion-header>
+<ion-content *ngIf="!showClient">
+        <ion-list>
+            <div *ngFor="let item of products">
+                <div class="ion-activatable">
+                    <ion-item-sliding>
+                        <ion-item>
+                            <ion-item>
+                                <ion-thumbnail slot="start">
+                                    <img src="{{item.image}}" alt="{{item.description}}">
+                                </ion-thumbnail>
+                                <ion-label>
+                                    <h2>{{item.name}}</h2>
+                                    <h3>{{item.description}}</h3>
+                                    <p>{{item.rating | number:'1.2-2' }} | {{item.storeName}} {{item.id}}</p> <!-- TODO replace store ID with Store -->
+                                </ion-label>
+                                {{item.price | currency:'MXN'}}
+                                <ion-ripple-effect></ion-ripple-effect>
+                            </ion-item>
+                        </ion-item>
 
-<ion-content>
-    <div *ngIf="!showClient">
-        
-    </div>
+                        <ion-item-options side="end" >
+                            <ion-item-option color="danger" (click)="delete(item.id)"><ion-icon name="trash" slot="icon-only"></ion-icon></ion-item-option>
+                        </ion-item-options>
+                    </ion-item-sliding>
 
-    <div *ngIf="showClient">
+                    <ion-ripple-effect></ion-ripple-effect>
+                </div>
+            </div>
+        </ion-list>
+    <ion-fab *ngIf="!showClient" vertical="bottom" horizontal="end" slot="fixed" translucent="true">
+        <ion-fab-button (click)="openNewProductModal()">
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+</ion-content>
+<ion-header *ngIf="showClient">
+    <ion-toolbar>
+        <ion-title>Productos Disponibles</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content *ngIf="showClient">
+    <div >
         <ion-text color="#AAAAAA" style="font-size: 2em; margin-left: 20px;text-align: center">
             <h1>Recomendaciones</h1>
         </ion-text>
@@ -32,7 +68,7 @@
                         <ion-label>
                             <h2>{{item.name}}</h2>
                             <h3>{{item.description}}</h3>
-                            <p>{{item.rating | number:'1.2-2' }} | {{item.store.storeName}}</p> <!-- TODO replace store ID with Store -->
+                            <p>{{item.rating | number:'1.2-2' }} | {{item.storeName}}</p> <!-- TODO replace store ID with Store -->
                         </ion-label>
                         {{item.price | currency:'MXN'}}
                         <ion-ripple-effect></ion-ripple-effect>
@@ -64,5 +100,5 @@
             </div>
         </ion-list>
     </div>
-
 </ion-content>
+
