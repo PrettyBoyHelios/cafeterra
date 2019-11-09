@@ -9,4 +9,5 @@ export interface Order {
     userId: string;
     status: string;
     timeCreated: number;
+    nameClient: string;
 }

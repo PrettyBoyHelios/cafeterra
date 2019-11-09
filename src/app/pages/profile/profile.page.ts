@@ -59,8 +59,7 @@ export class ProfilePage implements OnInit {
 
   async getName() {
     this.userInfoService.getUserInfo().subscribe( user => {
-      localStorage.setItem(name, 'user[0]');
-      console.log(localStorage.getItem(name));
+      localStorage.setItem('name', user[0]);
       this.userNameFromAuth = user[0];
     });
   }

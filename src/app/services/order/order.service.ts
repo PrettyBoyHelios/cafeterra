@@ -40,6 +40,7 @@ export class OrderService {
       sum += item.quantity * item.product.price;
     }
     const order: Order = {
+      nameClient: localStorage.getItem('name'),
       products: items,
       userId,
       store,
