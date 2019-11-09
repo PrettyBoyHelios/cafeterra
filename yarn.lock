@@ -2240,14 +2240,6 @@ copy-webpack-plugin@5.0.3:
     serialize-javascript "^1.7.0"
     webpack-log "^2.0.0"
 
-cordova-plugin-qrscanner@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/cordova-plugin-qrscanner/-/cordova-plugin-qrscanner-3.0.1.tgz#34af2ede5ce857ee9b4d75936e2916fead238545"
-  integrity sha512-xrwOP3nD+VmRSiV0w7chZ5PLw2YwpI9vtLdeoGNYLLzmmjjYbyIof+x9vOEOgjtwrg9S61rukmOZhQAmkzaosA==
-  dependencies:
-    qrcode-reader "^1.0.4"
-    webrtc-adapter "^3.1.4"
-
 core-js@3.1.4:
   version "3.1.4"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.1.4.tgz#3a2837fc48e582e1ae25907afcd6cf03b0cc7a07"

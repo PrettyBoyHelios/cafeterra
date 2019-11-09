@@ -18,9 +18,7 @@ export class AuthGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-
       return this.AFauth.authState.pipe(map( auth => {
-
         if(isNullOrUndefined(auth)){
           this.router.navigate(['/tabs/profile']);
           return false

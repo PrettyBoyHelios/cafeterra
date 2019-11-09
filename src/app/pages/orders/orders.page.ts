@@ -4,6 +4,8 @@ import {Product} from '../../models/product/product';
 import {OrderService} from '../../services/order/order.service';
 import {ModalController} from '@ionic/angular';
 import {OrderDetailPage} from '../order-detail/order-detail.page';
+import { AuthService } from '../../services/auth.service'
+import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner/ngx';
 
 @Component({
   selector: 'app-orders',
@@ -11,13 +13,18 @@ import {OrderDetailPage} from '../order-detail/order-detail.page';
   styleUrls: ['./orders.page.scss'],
 })
 export class OrdersPage implements OnInit {
+  private isClient : boolean;
   private orders: Order[] = [];
+  private options: BarcodeScannerOptions;
+  
   constructor(
       private orderService: OrderService,
       public modalController: ModalController,
+      private authservice: AuthService,
+      private barcodeScanner: BarcodeScanner
   ) {
+    this.isClient = authservice.clientType;
   }
-
 
   ngOnInit() {
     this.orderService.getOrders().subscribe( res => {
@@ -44,5 +51,4 @@ export class OrdersPage implements OnInit {
     });
     return await modal.present();
   }
-
 }

@@ -27,6 +27,7 @@ export class AuthService {
         this.isLoggedIn = true;
         this.userInfoService.getUserType().subscribe( res => {
           this.clientType = res.isClient;
+          console.log("clientType: " + this.clientType);
         });
         if (user.user.emailVerified) {
           this.isVerified = true;

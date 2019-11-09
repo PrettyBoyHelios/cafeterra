@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">cafeterra</string>
+    <string name="title_activity_main">cafeterra</string>
+    <string name="package_name">com.upbona.cafeterra</string>
+    <string name="custom_url_scheme">com.upbona.cafeterra</string>
+</resources>

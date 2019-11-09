@@ -19,6 +19,8 @@ import { environment } from '../environments/environment';
 import {Base64ToGallery} from '@ionic-native/base64-to-gallery/ngx';
 import {NgxQRCodeModule} from 'ngx-qrcode2';
 
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -36,7 +38,8 @@ import {NgxQRCodeModule} from 'ngx-qrcode2';
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
       Base64ToGallery,
-      NgxQRCodeModule
+      NgxQRCodeModule,
+      BarcodeScanner
   ],
   bootstrap: [AppComponent]
 })

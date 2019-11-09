@@ -4,8 +4,25 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="isClient">
   <ion-list>
     <app-order *ngFor="let order of orders" [order]="order" (click)="showOrderDetails(order)"></app-order>
   </ion-list>
+</ion-content>
+
+<ion-content *ngIf="!isClient">
+  <h1>Click Button To Scan</h1>
+
+  <ion-button (click)="scanCode()">
+    Scan Code
+  </ion-button>
+  
+  <div *ngIf="scannedData">
+    <p>
+      Scanned Code Text : <b>{{ scannedData["text"] }}</b>
+    </p>
+    <p>
+      Scanned Code Format : <b>{{ scannedData["format"] }}</b>
+    </p>
+  </div>
 </ion-content>
