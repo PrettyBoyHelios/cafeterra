@@ -37,4 +37,8 @@ export class ProductService {
     newProduct.store.storeName = '';
     this.productCollection.add(newProduct).then(r => console.log(r));
   }
+
+  public removeProduct(id: string) {
+    this.productCollection.doc(id).delete().then( r => console.log(r));
+  }
 }
