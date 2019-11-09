@@ -6,7 +6,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { ShoppingCartPage } from './shopping-cart.page';
-import {OrderComponent} from '../../components/order/order.component';
 import {VendorOrderComponent} from '../../components/vendor-order/vendor-order.component';
 import {OrderVendorPage} from '../order-vendor/order-vendor.page';
 
@@ -18,13 +17,16 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    RouterModule.forChild(routes)
-  ],
-  declarations: [ShoppingCartPage, VendorOrderComponent, OrderVendorPage],
-  entryComponents: [OrderVendorPage],
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        RouterModule.forChild(routes)
+    ],
+    declarations: [ShoppingCartPage, VendorOrderComponent, OrderVendorPage],
+    entryComponents: [OrderVendorPage],
+    exports: [
+        VendorOrderComponent
+    ]
 })
 export class ShoppingCartPageModule {}

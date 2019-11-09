@@ -12,6 +12,8 @@ import {NgxQRCodeModule} from 'ngx-qrcode2';
 
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { OrderVendorPage } from '../order-vendor/order-vendor.page';
+import {OrderVendorTempPage} from '../order-vendor-temp/order-vendor-temp.page';
+import {ShoppingCartPageModule} from '../shopping-cart/shopping-cart.module';
 
 const routes: Routes = [
   {
@@ -28,9 +30,9 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         NgxQRCodeModule,
         ZXingScannerModule,
-        OrderVendorPage,
+        ShoppingCartPageModule,
     ],
-  declarations: [OrdersPage, OrderComponent, OrderDetailPage],
-  entryComponents: [OrderDetailPage, OrderVendorPage]
+  declarations: [OrdersPage, OrderComponent, OrderDetailPage, OrderVendorTempPage],
+  entryComponents: [OrderDetailPage, OrderVendorTempPage]
 })
 export class OrdersPageModule {}
