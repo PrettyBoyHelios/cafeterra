@@ -6,6 +6,8 @@
 
 <ion-content>
   <ion-list>
-    <app-order *ngFor="let order of orders" [order]="order" (click)="showOrderDetails(order)"></app-order>
+    <div *ngFor="let order of orders" >
+      <app-order *ngIf="userUid===order.userId" [order]="order" (click)="showOrderDetails(order)"></app-order>
+    </div>
   </ion-list>
 </ion-content>
