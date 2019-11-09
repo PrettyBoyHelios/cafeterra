@@ -9,6 +9,7 @@ import { OrdersPage } from './orders.page';
 import {OrderComponent} from '../../components/order/order.component';
 import {OrderDetailPage} from '../order-detail/order-detail.page';
 import {NgxQRCodeModule} from 'ngx-qrcode2';
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
 
 const routes: Routes = [
   {
@@ -23,7 +24,8 @@ const routes: Routes = [
         FormsModule,
         IonicModule,
         RouterModule.forChild(routes),
-        NgxQRCodeModule
+        NgxQRCodeModule,
+        ZXingScannerModule
     ],
   declarations: [OrdersPage, OrderComponent, OrderDetailPage],
   entryComponents: [OrderDetailPage]

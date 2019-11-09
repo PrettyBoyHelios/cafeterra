@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {Order} from '../../models/order';
-import {Product} from '../../models/product/product';
 import {OrderService} from '../../services/order/order.service';
 import {ModalController} from '@ionic/angular';
 import {OrderDetailPage} from '../order-detail/order-detail.page';
@@ -47,6 +46,7 @@ export class OrdersPage implements OnInit {
 
     this.showClient = (localStorage.getItem('showClient') === 'true');
   }
+
 
   async showOrderDetails(o: Order) {
     const modal = await this.modalController.create({

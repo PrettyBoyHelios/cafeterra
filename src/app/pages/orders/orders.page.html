@@ -10,4 +10,7 @@
       <app-order *ngIf="userUid===order.userId" [order]="order" (click)="showOrderDetails(order)"></app-order>
     </div>
   </ion-list>
+  <ion-button (click)="scanCode()">
+    <ion-icon name="qr-scanner">Scan Code</ion-icon>
+  </ion-button>
 </ion-content>
