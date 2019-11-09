@@ -12,7 +12,7 @@
   </ion-list>
 </ion-content>
 
-<ion-content *ngIf="!showClient>
+<ion-content *ngIf="!showClient">
 
   <zxing-scanner [torch]="torchEnabled" [(device)]="currentDevice" (scanSuccess)="onCodeResult($event)"
     [formats]="formatsEnabled" [tryHarder]="tryHarder" (permissionResponse)="onHasPermission($event)"
