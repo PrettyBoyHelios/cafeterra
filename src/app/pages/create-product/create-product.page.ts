@@ -32,7 +32,8 @@ export class CreateProductPage implements OnInit {
   async addProductToDB() {
     if (this.newProduct.name !== '' && this.newProduct.image !== '' &&
         this.newProduct.description !== '' && this.newProduct.price !== undefined) {
-      this.newProduct.store.storeName = this.store.storeName;
+      this.newProduct.store.storeName = localStorage.getItem('data');
+      this.newProduct.storeName = localStorage.getItem('data');
       this.newProduct.store.storeId = this.store.storeId;
       this.newProduct.available = true;
       this.newProduct.rating = 5.0;

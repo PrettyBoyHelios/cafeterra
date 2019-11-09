@@ -10,4 +10,5 @@ export interface Product {
     rating?: number;
     store?: Store;
     timesBought?: number;
+    storeName?: string;
 }

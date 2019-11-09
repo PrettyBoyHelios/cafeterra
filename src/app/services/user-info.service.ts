@@ -49,6 +49,14 @@ export class UserInfoService {
   }
 
   getUserType() {
-    return this.userCollection.doc<User>(this.fAuth.auth.currentUser.uid).valueChanges();
+    return this.setUserData();
+  }
+
+  setUserData() {
+    const ref = this.userCollection.doc<User>(this.fAuth.auth.currentUser.uid).valueChanges();
+    ref.subscribe( res => {
+      localStorage.setItem('data', res.store.storeName);
+    });
+    return ref;
   }
 }
