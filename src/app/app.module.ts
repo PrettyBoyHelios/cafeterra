@@ -39,7 +39,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
       Base64ToGallery,
       NgxQRCodeModule,
-      BarcodeScanner
+      BarcodeScanner,
   ],
   bootstrap: [AppComponent]
 })

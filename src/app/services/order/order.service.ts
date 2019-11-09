@@ -29,6 +29,10 @@ export class OrderService {
     return this.orders;
   }
 
+  public getOrder(id: string) {
+    return this.orderCollection.doc<Order>(id).valueChanges();
+  }
+
   public addOrder(items: OrderItem[], store: Store) {
     const userId = 'pending';
     let sum = 0.0;

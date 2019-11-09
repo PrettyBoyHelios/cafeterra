@@ -4,25 +4,35 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="isClient">
+
+<ion-content>
+
+  <zxing-scanner [torch]="torchEnabled" [(device)]="currentDevice" (scanSuccess)="onCodeResult($event)"
+    [formats]="formatsEnabled" [tryHarder]="tryHarder" (permissionResponse)="onHasPermission($event)"
+    (camerasFound)="onCamerasFound($event)" (torchCompatible)="onTorchCompatible($event)"></zxing-scanner>
+
+  <section class="results" *ngIf="qrResultString">
+    <div>
+      <small>Resultado del Qr:</small>
+      <strong>{{ qrResultString }}</strong>
+    </div>
+    <button mat-icon-button (click)="clearResult()">&times;</button>
+    <ion-button color="danger" (click)="getOrder()" expand="block">
+      Ir por la orden
+    </ion-button>
+  </section>
+
+  
+
+</ion-content>
+
+
+<!-- <ion-content *ngIf="isClient">
   <ion-list>
     <app-order *ngFor="let order of orders" [order]="order" (click)="showOrderDetails(order)"></app-order>
   </ion-list>
-</ion-content>
+</ion-content> -->
 
-<ion-content *ngIf="!isClient">
-  <h1>Click Button To Scan</h1>
+<!-- <ion-content *ngIf="!isClient">
 
-  <ion-button (click)="scanCode()">
-    Scan Code
-  </ion-button>
-  
-  <div *ngIf="scannedData">
-    <p>
-      Scanned Code Text : <b>{{ scannedData["text"] }}</b>
-    </p>
-    <p>
-      Scanned Code Format : <b>{{ scannedData["format"] }}</b>
-    </p>
-  </div>
-</ion-content>
+</ion-content> -->

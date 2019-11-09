@@ -47,6 +47,18 @@ export class UserInfoService {
     }));
   }
 
+  getOrder(){
+    return this.db.collection('orders').snapshotChanges().pipe(map(rooms => {
+      return rooms.map(a => {
+        const data = a.payload.doc.data();
+        // if (data['uid'] === this.fAuth.auth.currentUser.uid) {{
+          return data;
+      //   }
+      // }
+      });
+    }));
+  }
+
   getUserType() {
     return this.userCollection.doc<User>(this.fAuth.auth.currentUser.uid).valueChanges();
   }
