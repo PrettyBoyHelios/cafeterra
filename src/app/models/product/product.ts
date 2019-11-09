@@ -12,3 +12,8 @@ export interface Product {
     timesBought?: number;
     storeName?: string;
 }
+
+export interface Special {
+    id?: string;
+    productId?: string;
+}

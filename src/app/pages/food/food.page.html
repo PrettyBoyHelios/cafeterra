@@ -1,11 +1,10 @@
-<ion-header translucent>
-  <ion-toolbar>
-    <ion-title>Productos</ion-title>
-  </ion-toolbar>
-</ion-header>
 
-<ion-content>
-    <div *ngIf="!showClient">
+<ion-header *ngIf="!showClient">
+    <ion-toolbar>
+        <ion-title>CRUD Productos</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content *ngIf="!showClient">
         <ion-list>
             <div *ngFor="let item of products">
                 <div class="ion-activatable">
@@ -34,15 +33,19 @@
                 </div>
             </div>
         </ion-list>
-
-    </div>
     <ion-fab *ngIf="!showClient" vertical="bottom" horizontal="end" slot="fixed" translucent="true">
         <ion-fab-button (click)="openNewProductModal()">
             <ion-icon name="add"></ion-icon>
         </ion-fab-button>
     </ion-fab>
-
-    <div *ngIf="showClient">
+</ion-content>
+<ion-header *ngIf="showClient">
+    <ion-toolbar>
+        <ion-title>Productos Disponibles</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content *ngIf="showClient">
+    <div >
         <ion-text color="#AAAAAA" style="font-size: 2em; margin-left: 20px;text-align: center">
             <h1>Recomendaciones</h1>
         </ion-text>
@@ -98,3 +101,4 @@
         </ion-list>
     </div>
 </ion-content>
+

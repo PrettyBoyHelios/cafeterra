@@ -21,6 +21,8 @@ export class FoodPage implements OnInit {
   private products: Product[];
   private resultProducts: Product[];
 
+  private specialProducts: Product[];
+
   // Behaviour Vars
   private showClient: boolean;
 
@@ -51,6 +53,9 @@ export class FoodPage implements OnInit {
         localStorage.setItem('showClient', 'false');
       }
       this.store = res.store;
+    });
+    this.prodService.getSpecials().subscribe( res => {
+      this.specialProducts = res;
     });
   }
 
