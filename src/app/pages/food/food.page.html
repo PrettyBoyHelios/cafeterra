@@ -1,6 +1,6 @@
 <ion-header translucent>
   <ion-toolbar>
-    <ion-title>Alimentos</ion-title>
+    <ion-title>Productos</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -34,12 +34,13 @@
                 </div>
             </div>
         </ion-list>
-        <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-            <ion-fab-button (click)="openNewProductModal()">
-                <ion-icon name="add"></ion-icon>
-            </ion-fab-button>
-        </ion-fab>
+
     </div>
+    <ion-fab *ngIf="!showClient" vertical="bottom" horizontal="end" slot="fixed" translucent="true">
+        <ion-fab-button (click)="openNewProductModal()">
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
 
     <div *ngIf="showClient">
         <ion-text color="#AAAAAA" style="font-size: 2em; margin-left: 20px;text-align: center">
@@ -96,5 +97,4 @@
             </div>
         </ion-list>
     </div>
-
 </ion-content>
