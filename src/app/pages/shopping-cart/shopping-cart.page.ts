@@ -4,6 +4,7 @@ import {OrderItem} from '../../models/order-item';
 import {OrderService} from '../../services/order/order.service';
 import {ToastController} from '@ionic/angular';
 import {Store} from '../../models/store';
+import {UserInfoService} from '../../services/user-info.service';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -11,14 +12,18 @@ import {Store} from '../../models/store';
   styleUrls: ['./shopping-cart.page.scss'],
 })
 export class ShoppingCartPage implements OnInit {
-  private store: string;
+  private userId = '';
   constructor(
       private shopService: ShoppingCartService,
       private orderService: OrderService,
       private toastController: ToastController,
+      private userInfoService: UserInfoService,
   ) { }
 
   ngOnInit() {
+    this.userInfoService.getUserType().subscribe( res => {
+      this.userId = res.uid;
+    });
   }
 
   public deleteItem(id: string) {
@@ -26,7 +31,7 @@ export class ShoppingCartPage implements OnInit {
   }
 
   public async createOrder(items: OrderItem[], store: Store) {
-    this.orderService.addOrder(items, store);
+    this.orderService.addOrder(items, store, this.userId);
     this.shopService.cancelWholeOrder();
     await this.presentToastWithOptions();
   }

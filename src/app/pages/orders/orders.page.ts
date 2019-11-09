@@ -4,6 +4,7 @@ import {Product} from '../../models/product/product';
 import {OrderService} from '../../services/order/order.service';
 import {ModalController} from '@ionic/angular';
 import {OrderDetailPage} from '../order-detail/order-detail.page';
+import {UserInfoService} from '../../services/user-info.service';
 
 @Component({
   selector: 'app-orders',
@@ -12,9 +13,11 @@ import {OrderDetailPage} from '../order-detail/order-detail.page';
 })
 export class OrdersPage implements OnInit {
   private orders: Order[] = [];
+  private userUid: string;
   constructor(
       private orderService: OrderService,
       public modalController: ModalController,
+      private userInfoService: UserInfoService,
   ) {
   }
 
@@ -31,6 +34,10 @@ export class OrdersPage implements OnInit {
         return 0;
       });
       this.orders = res;
+    });
+
+    this.userInfoService.getUserType().subscribe( res => {
+      this.userUid = res.uid;
     });
   }
 
