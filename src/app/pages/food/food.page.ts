@@ -7,6 +7,7 @@ import {Store} from '../../models/store';
 import {Router} from '@angular/router';
 import {ShoppingCartService} from '../../services/shopping-cart/shopping-cart.service';
 import {storage} from 'firebase';
+import {UserInfoService} from '../../services/user-info.service';
 
 
 @Component({
@@ -18,8 +19,11 @@ import {storage} from 'firebase';
 export class FoodPage implements OnInit {
   private products: Product[];
   private resultProducts: Product[];
+
+  private showClient: boolean;
   private searchTerm: string;
   private isSearching = false;
+
   private name: string;
   private price: number;
   private amount: number;
@@ -27,7 +31,7 @@ export class FoodPage implements OnInit {
   private store: Store = {
     storeName: undefined,
     storeId: undefined
-  }
+  };
   private newProduct: Product = {
     name: undefined,
     available: undefined,
@@ -44,11 +48,15 @@ export class FoodPage implements OnInit {
       private prodService: ProductService,
       private shopService: ShoppingCartService,
       private router: Router,
+      private userInfoService: UserInfoService,
   ) {}
 
   ngOnInit() {
     this.prodService.getProducts().subscribe( res => {
       this.products = res;
+    });
+    this.userInfoService.getUserType().subscribe( res => {
+      this.showClient = res.isClient;
     });
   }
 
