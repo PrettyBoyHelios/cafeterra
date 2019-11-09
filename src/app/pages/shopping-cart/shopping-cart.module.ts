@@ -6,6 +6,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { ShoppingCartPage } from './shopping-cart.page';
+import {OrderComponent} from '../../components/order/order.component';
+import {VendorOrderComponent} from '../../components/vendor-order/vendor-order.component';
+import {OrderVendorPage} from '../order-vendor/order-vendor.page';
 
 const routes: Routes = [
   {
@@ -21,6 +24,7 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [ShoppingCartPage]
+  declarations: [ShoppingCartPage, VendorOrderComponent, OrderVendorPage],
+  entryComponents: [OrderVendorPage],
 })
 export class ShoppingCartPageModule {}

@@ -51,8 +51,6 @@ export class FoodPage implements OnInit {
         localStorage.setItem('showClient', 'false');
       }
       this.store = res.store;
-      console.log(localStorage);
-      console.log('oBTAINED STORE: ', this.store);
     });
   }
 

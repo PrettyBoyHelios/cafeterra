@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Detalles de la Orden</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-button color="danger" (click)="dismiss()" expand="block">
+    Regresar
+  </ion-button>
+  <ion-button *ngIf="order.status==='approved'" fill="outline" color="success" (click)="updateStatus(order, 'prepared')" expand="block">
+    Marcar como Preparada
+  </ion-button>
+  <ion-button *ngIf="order.status==='prepared'" color="success" (click)="updateStatus(order, 'delivered')" expand="block">
+    Marcar como Entregada
+  </ion-button>
+  <app-vendor-order [details]="true" [order]="order"></app-vendor-order>
+</ion-content>

@@ -1,0 +1,44 @@
+<ion-card class="ion-activatable">
+  <div *ngIf="details">
+  </div>
+
+  <ion-card-header>
+    <ion-card-subtitle>
+      {{order.timeCreated | date: 'dd MMMM yyyy H:mm'}} {{order.id}}
+    </ion-card-subtitle>
+    <div class="inline">
+      <div *ngIf="showClient">
+        <ion-card-title class="ion-align-items-start">
+          {{order.storeName}}
+        </ion-card-title>
+      </div>
+      <div *ngIf="!showClient">
+        <ion-card-title class="ion-align-items-start"> <ion-icon name="clock"></ion-icon>{{order.nameClient}}</ion-card-title>
+      </div>
+      <ion-label>
+
+        <h2>
+          <ion-icon *ngIf="order.status==='approved'" name="checkmark-circle-outline"></ion-icon>
+          <ion-icon *ngIf="order.status==='prepared'" color="success" name="checkmark-circle-outline"></ion-icon>
+          <ion-icon *ngIf="order.status==='delivered'" color="success" name="checkmark-circle"></ion-icon>
+          {{order.totalAmount | currency: 'MXN' }}
+        </h2>
+      </ion-label>
+    </div>
+
+  </ion-card-header>
+  <ion-card-content *ngIf="details">
+    <ion-list>
+      <ion-item *ngFor="let item of order.products">
+        <ion-avatar slot="start">
+          <img src="{{item.product.image}}" alt="{{item.product.description}}">
+        </ion-avatar>
+        ({{item.quantity}}) {{item.product.name}}
+      </ion-item>
+    </ion-list>
+    <ion-item lines="none" class="ion-justify-content-center ion-align-items-center">
+      <ion-icon *ngIf="order.status==='approved'" name="checkmark-circle-outline"></ion-icon>
+    </ion-item>
+  </ion-card-content>
+  <ion-ripple-effect></ion-ripple-effect>
+</ion-card>

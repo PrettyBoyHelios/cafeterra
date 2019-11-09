@@ -14,6 +14,11 @@ import {UserInfoService} from '../../services/user-info.service';
 export class OrdersPage implements OnInit {
   private orders: Order[] = [];
   private userUid: string;
+
+  private showClient: boolean;
+
+  // Vendor Variables
+
   constructor(
       private orderService: OrderService,
       public modalController: ModalController,
@@ -39,6 +44,8 @@ export class OrdersPage implements OnInit {
     this.userInfoService.getUserType().subscribe( res => {
       this.userUid = res.uid;
     });
+
+    this.showClient = (localStorage.getItem('showClient') === 'true');
   }
 
   async showOrderDetails(o: Order) {
