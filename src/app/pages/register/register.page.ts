@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from "../../services/auth.service";
-import { Router } from "@angular/router";
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -18,10 +18,9 @@ export class RegisterPage implements OnInit {
   ngOnInit() {
   }
 
-  OnSubmitRegister(){
+  OnSubmitRegister() {
     this.auth.register(this.email, this.password, this.name).then( auth => {
-      this
       this.router.navigate(['/tabs/food']);
-    }).catch(err => console.log(err))
+    }).catch(err => console.log(err));
   }
 }
