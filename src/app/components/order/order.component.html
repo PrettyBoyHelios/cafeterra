@@ -12,7 +12,10 @@
     <ion-card-subtitle>{{order.timeCreated | date: 'dd MMMM yyyy H:mm'}}</ion-card-subtitle>
     <div class="inline">
       <div *ngIf="showClient">
-        <ion-card-title class="ion-align-items-start">{{order.store.storeName}}</ion-card-title>
+        <ion-card-title class="ion-align-items-start">
+          <ion-icon *ngIf="order.status==='approved'" name="checkmark-circle-outline"></ion-icon>
+          {{order.store.storeName}}
+        </ion-card-title>
       </div>
       <div *ngIf="!showClient">
         <ion-card-title class="ion-align-items-start">{{order.nameClient}}</ion-card-title>
