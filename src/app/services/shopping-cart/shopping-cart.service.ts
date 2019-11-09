@@ -43,6 +43,7 @@ export class ShoppingCartService {
       if (orderItem.product.id === item.id) {
         productIsAlready = true;
         orderItem.quantity++;
+        this.addedProductToast(item.name);
       }
     }
     if (!productIsAlready) {

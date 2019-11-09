@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { FoodPage } from './food.page';
 import {FoodItemComponent} from '../../components/food-item/food-item.component';
+import {CreateProductPage} from '../create-product/create-product.page';
 
 const routes: Routes = [
   {
@@ -22,6 +23,7 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [FoodPage, FoodItemComponent]
+  declarations: [FoodPage, FoodItemComponent, CreateProductPage],
+  entryComponents: [CreateProductPage],
 })
 export class FoodPageModule {}

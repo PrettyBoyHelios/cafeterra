@@ -4,6 +4,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import * as firebase from 'firebase/app';
 import { ToastController } from '@ionic/angular';
 import { UserInfoService } from './user-info.service';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,10 +16,11 @@ export class AuthService {
   isVerified: boolean;
   public clientType: boolean;
 
-  constructor(private userInfoService: UserInfoService,
-              private authService: AngularFireAuth,
-              private db: AngularFirestore,
-              public toastController: ToastController
+  constructor(
+      private userInfoService: UserInfoService,
+      private authService: AngularFireAuth,
+      private db: AngularFirestore,
+      public toastController: ToastController
   ) { }
 
   login(email: string, password: string) {

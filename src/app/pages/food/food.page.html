@@ -6,7 +6,39 @@
 
 <ion-content>
     <div *ngIf="!showClient">
-        
+        <ion-list>
+            <div *ngFor="let item of products">
+                <div class="ion-activatable">
+                    <ion-item-sliding>
+                        <ion-item>
+                            <ion-item>
+                                <ion-thumbnail slot="start">
+                                    <img src="{{item.image}}" alt="{{item.description}}">
+                                </ion-thumbnail>
+                                <ion-label>
+                                    <h2>{{item.name}}</h2>
+                                    <h3>{{item.description}}</h3>
+                                    <p>{{item.rating | number:'1.2-2' }} | {{item.store.storeName}} {{item.id}}</p> <!-- TODO replace store ID with Store -->
+                                </ion-label>
+                                {{item.price | currency:'MXN'}}
+                                <ion-ripple-effect></ion-ripple-effect>
+                            </ion-item>
+                        </ion-item>
+
+                        <ion-item-options side="end" >
+                            <ion-item-option color="danger" (click)="delete(item.id)"><ion-icon name="trash" slot="icon-only"></ion-icon></ion-item-option>
+                        </ion-item-options>
+                    </ion-item-sliding>
+
+                    <ion-ripple-effect></ion-ripple-effect>
+                </div>
+            </div>
+        </ion-list>
+        <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+            <ion-fab-button (click)="openNewProductModal()">
+                <ion-icon name="add"></ion-icon>
+            </ion-fab-button>
+        </ion-fab>
     </div>
 
     <div *ngIf="showClient">

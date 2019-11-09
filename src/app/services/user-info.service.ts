@@ -3,12 +3,14 @@ import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firest
 import {map} from 'rxjs/operators';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {Observable} from 'rxjs';
+import {Store} from '../models/store';
 
 export interface User {
   name?: string;
   uid?: string;
   img?: string;
   isClient?: boolean;
+  store?: Store;
 }
 
 
@@ -19,7 +21,6 @@ export interface User {
 export class UserInfoService {
   userName: string;
   private userCollection: AngularFirestoreCollection<User>;
-  private userInfo: User;
   private userList: Observable<User[]>;
   constructor(
       public fAuth: AngularFireAuth,

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from "../../services/auth.service";
-import { UserInfoService } from "../../services/user-info.service";
-import { Router } from "@angular/router";
-import { AngularFireAuth } from "@angular/fire/auth";
-import { AngularFirestore } from "@angular/fire/firestore";
+import { AuthService } from '../../services/auth.service';
+import { UserInfoService } from '../../services/user-info.service';
+import { Router } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { ToastController } from '@ionic/angular';
 
 @Component({
@@ -13,30 +13,34 @@ import { ToastController } from '@ionic/angular';
 })
 
 export class ProfilePage implements OnInit {
-  email: string = "";
+  email = '';
   userEmail: string;
   password: string;
-  currentUser : any;
-  isLoggedIn : boolean;
-  userNameFromAuth : string;
-  public hasEmailVerification : boolean = true;
+  currentUser: any;
+  isLoggedIn: boolean;
+  userNameFromAuth: string;
+  public hasEmailVerification = true;
 
-  constructor( public toastController: ToastController, public userInfoService: UserInfoService, private db : AngularFirestore, private authService: AuthService, private fauthService: AngularFireAuth, public router: Router) { 
-    this.getName();
-
-  }
-
-  ngOnInit(){   
-    this.getName();
-  }
-
-  ionViewWillEnter(){
+  constructor( public toastController: ToastController,
+               public userInfoService: UserInfoService,
+               private db: AngularFirestore,
+               private authService: AuthService,
+               private fauthService: AngularFireAuth,
+               public router: Router
+  ) {
     this.getName();
   }
 
-  onSubmitLogin()
-  {
-    this.authService.login(this.email, this.password).then( res =>{
+  ngOnInit() {
+    this.getName();
+  }
+
+  ionViewWillEnter() {
+    this.getName();
+  }
+
+  onSubmitLogin() {
+    this.authService.login(this.email, this.password).then( res => {
       this.isLoggedIn = true;
       this.hasEmailVerification = this.authService.isVerified;
       this.getName();
@@ -44,7 +48,7 @@ export class ProfilePage implements OnInit {
     }).catch(err => this.presentToast('Por favor verifique sus datos y que el usuario exista.', false, 'bottom', 2000));
   }
 
-  Onlogout(){
+  Onlogout() {
     this.reload();
   }
 
@@ -53,7 +57,7 @@ export class ProfilePage implements OnInit {
     window.location.reload();
   }
 
-  async getName(){
+  async getName() {
     this.userInfoService.getUserInfo().subscribe( user => {
       localStorage.setItem(name, 'user[0]');
       console.log(localStorage.getItem(name));
@@ -61,17 +65,17 @@ export class ProfilePage implements OnInit {
     });
   }
 
-  async presentToast(message: string, closeBoton:boolean, position:any, duration: number) {
+  async presentToast(message: string, closeBoton: boolean, position: any, duration: number) {
     const toast = await this.toastController.create({
-      message: message,
-      duration: duration,
-      position: position,
+      message,
+      duration,
+      position,
       showCloseButton: closeBoton
     });
-    toast.present();
+    await toast.present();
   }
 
-  sendEmailVerification(){
+  sendEmailVerification() {
     this.authService.sendEmailVerification();
   }
 }
