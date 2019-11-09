@@ -23,7 +23,6 @@ export class ProfilePage implements OnInit {
 
   constructor( public toastController: ToastController, public userInfoService: UserInfoService, private db : AngularFirestore, private authService: AuthService, private fauthService: AngularFireAuth, public router: Router) { 
     this.getName();
-
   }
 
   ngOnInit(){   
@@ -55,9 +54,9 @@ export class ProfilePage implements OnInit {
 
   async getName(){
     this.userInfoService.getUserInfo().subscribe( user => {
-      localStorage.setItem(name, 'user[0]');
+      localStorage.setItem(name, 'user[2]');
       console.log(localStorage.getItem(name));
-      this.userNameFromAuth = user[0];
+      this.userNameFromAuth = user[2];
     });
   }
 
