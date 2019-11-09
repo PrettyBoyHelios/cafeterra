@@ -9,8 +9,8 @@ import { Router } from '@angular/router';
 })
 export class RegisterPage implements OnInit {
 
-  public  email: string;
-  public  name: string;
+  public email: string;
+  public name: string;
   public password: string;
 
   constructor(private auth: AuthService, private router: Router) { }

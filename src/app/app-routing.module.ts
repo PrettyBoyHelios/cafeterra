@@ -7,6 +7,7 @@ const routes: Routes = [
     path: '',
     loadChildren: './pages/tabs/tabs.module#TabsPageModule'
   },
+  { path: 'create-product', loadChildren: './pages/create-product/create-product.module#CreateProductPageModule' },
 
 ];
 @NgModule({
