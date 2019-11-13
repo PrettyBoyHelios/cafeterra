@@ -308,6 +308,11 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
+"@capacitor/android@^1.3.0":
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/@capacitor/android/-/android-1.3.0.tgz#46e99e7bdd34e8527ea8b23330f66417389368f6"
+  integrity sha512-b+x15Sr4hOHUe45CaS2Xh6yc0zTjamo3eF0Wpra/rsh6gOwoI4bBRqwvKLeWsQRK1zakClfoFUSgpRWCAPASGw==
+
 "@capacitor/cli@^1.3.0":
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/@capacitor/cli/-/cli-1.3.0.tgz#24d071f4792a9c74b356b7d8981d3672d4a960be"
@@ -560,6 +565,13 @@
   version "5.15.0"
   resolved "https://registry.yarnpkg.com/@ionic-native/core/-/core-5.15.0.tgz#f7674bbfd9a197677b4c92407f56c1c51ed1a8ef"
   integrity sha512-CBZdcud/VY58rKPhnLvWm+M6vt0SCynRmyHvfnV2H/2dzwpVbAQUVm32eYAfCBzV1BCX4Yyrf3Qzic2nd9MhUw==
+  dependencies:
+    "@types/cordova" latest
+
+"@ionic-native/splash-screen@^5.16.0":
+  version "5.16.0"
+  resolved "https://registry.yarnpkg.com/@ionic-native/splash-screen/-/splash-screen-5.16.0.tgz#9d01a39e762b1bab78fe49fad179e86654d349a0"
+  integrity sha512-Fd2sUcjJrS+kcrbwfLBoez+8uU9ab/QePBDFlEtN55ac4xRtL2RgPfhuamYC0WhTl6D3YjWMXPQ1D5sHAQ6Kdw==
   dependencies:
     "@types/cordova" latest
 

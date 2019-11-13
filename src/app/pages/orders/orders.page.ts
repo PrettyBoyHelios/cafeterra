@@ -13,7 +13,6 @@ import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firest
 import {map} from 'rxjs/operators';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {UserInfoService} from '../../services/user-info.service';
-import { OrderVendorPage } from '../order-vendor/order-vendor.page';
 
 @Component({
   selector: 'app-orders',
@@ -79,7 +78,6 @@ export class OrdersPage implements OnInit {
         return 0;
       });
       this.orders = res;
-      this.showClient = (localStorage.getItem('showClient') === 'true');
     });
 
     this.userInfoService.getUserType().subscribe( res => {
@@ -122,6 +120,8 @@ export class OrdersPage implements OnInit {
     const data = {
       formatsEnabled: this.formatsEnabled,
     };
+
+
   }
 
   onHasPermission(has: boolean) {
@@ -153,18 +153,6 @@ export class OrdersPage implements OnInit {
       this.orderScanned = res;
       console.log(res);
     })
-    this.showOrderVendorDetails(this.orderScanned);
     console.log("orden " + this.orderScanned);
-  }
-
-  async showOrderVendorDetails(o: Order) {
-    const modal = await this.modalController.create({
-      component: OrderVendorPage,
-      componentProps: {
-        order: o,
-        details: true,
-      }
-    });
-    return await modal.present();
   }
 }

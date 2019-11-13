@@ -13,6 +13,7 @@ import { ToastController } from '@ionic/angular';
 })
 
 export class ProfilePage implements OnInit {
+
   email = '';
   userEmail: string;
   password: string;
@@ -27,23 +28,17 @@ export class ProfilePage implements OnInit {
                private authService: AuthService,
                private fauthService: AngularFireAuth,
                public router: Router
-  ) {
-    this.getName();
-  }
+  ) { }
 
-  ngOnInit() {
-    this.getName();
-  }
-
-  ionViewWillEnter() {
-    this.getName();
-  }
+  ngOnInit(){ }
 
   onSubmitLogin() {
     this.authService.login(this.email, this.password).then( res => {
+      this.userInfoService.getUser(this.fauthService.auth.currentUser.uid).subscribe( async user =>{
+        this.userNameFromAuth = await user['name'];
+      });
       this.isLoggedIn = true;
       this.hasEmailVerification = this.authService.isVerified;
-      this.getName();
       this.router.navigate(['/tabs/food/']);
       localStorage.setItem('name', this.fauthService.auth.currentUser.displayName);
     }).catch(err => this.presentToast('Por favor verifique sus datos y que el usuario exista.', false, 'bottom', 2000));
@@ -54,16 +49,7 @@ export class ProfilePage implements OnInit {
   }
 
   reload() {
-    this.getName();
     window.location.reload();
-  }
-
-  async getName() {
-    this.userInfoService.getUserInfo().subscribe( user => {
-      localStorage.setItem(name, 'user[2]');
-      console.log(localStorage.getItem(name));
-      this.userNameFromAuth = user[2];
-    });
   }
 
   async presentToast(message: string, closeBoton: boolean, position: any, duration: number) {

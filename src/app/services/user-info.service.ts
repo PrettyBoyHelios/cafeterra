@@ -60,6 +60,10 @@ export class UserInfoService {
     }));
   }
 
+  getUser(user_uid : string){
+    return this.db.collection('users').doc(user_uid).valueChanges()
+  }
+
   getUserType() {
     return this.setUserData();
   }
