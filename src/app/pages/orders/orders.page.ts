@@ -20,7 +20,7 @@ import {UserInfoService} from '../../services/user-info.service';
   styleUrls: ['./orders.page.scss'],
 })
 export class OrdersPage implements OnInit {
-  private isClient : boolean;
+  private isClient: boolean;
   private orders: Order[] = [];
   private options: BarcodeScannerOptions;
   private orderScanned: Order;
@@ -40,7 +40,6 @@ export class OrdersPage implements OnInit {
   hasPermission: boolean;
 
   qrResultString: string;
-
   torchEnabled = false;
   torchAvailable$ = new BehaviorSubject<boolean>(false);
   tryHarder = false;
@@ -65,7 +64,7 @@ export class OrdersPage implements OnInit {
   getBackCamera() {
     return this.scanner.autostart;
   }
-  
+
   ngOnInit() {
     this.orderService.getOrders().subscribe( res => {
       res.sort((a, b) => {
@@ -148,7 +147,7 @@ export class OrdersPage implements OnInit {
     this.tryHarder = !this.tryHarder;
   }
 
-  getOrder(){
+  getOrder() {
     this.orderService.getOrder(this.qrResultString).subscribe( res => {
       this.orderScanned = res;
       console.log(res);
